@@ -34,7 +34,7 @@ describe('Testing end2end with network', function(){
     };
     let args = ["res123", JSON.stringify(resObj)];
     fabService.invoke(randomUser, constants.createResident,  args)
-        .then((txID) =>{
+        .then((txID) =>{JSON.stringify(data)
           expect(txID).to.match(/^([A-Fa-f0-9]{64})$/);
           done()
         })

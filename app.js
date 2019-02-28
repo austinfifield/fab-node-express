@@ -3,12 +3,16 @@ var express = require('express');
 var path = require('path');
 var cors = require('cors');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var morgan = require('morgan');
 const winston = require('./src/config/winston').getLogger(module);
+const constants = require('./src/constants')
+let residents = require('./src/CC/residents');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-let fabricRoute = require('./routes/fabric')
+let fabricRoute = require('./routes/fabric');
+
+
 
 var app = express();
 
@@ -25,6 +29,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/fabric', fabricRoute);
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
