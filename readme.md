@@ -1,4 +1,11 @@
-to run test use npm run test
+# Prereqs
+clone Huy's network
+git clon https://github.com/httran13/fabric-network
+follow his readme
 
-In order for test to pass, fabric network must be running locally# fab-node-express
-# fab-node-express
+# Node SDK (above network must be up)
+# must use nodejs version 8.9.0
+nvm use 8.9.0 
+npm run test
+# should pass the three tests
+npm run start
