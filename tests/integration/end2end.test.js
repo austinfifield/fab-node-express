@@ -12,40 +12,40 @@ const randomUser = testUser+random.generate()
 
 describe('Testing end2end with network', function(){
 
-  it('Create User', function(done){
-    fabService.makeUser(randomUser, 'defaultpw')
-        .then((user) =>{
-          expect(user.getName()).to.equals(randomUser);
-          done()
-        })
-  })
+ it('Create User', function(done){
+   fabService.makeUser(randomUser, 'defaultpw')
+       .then((user) =>{
+         expect(user.getName()).to.equals(randomUser);
+         done()
+       })
+ })
 
-  it('Invoke chaincode', function(done){
-    //create args
-    let resObj = {
-      firstName: "junkName",
-      lastName: "lastJunk",
-      alias: "alskdj",
-      tokens: "alksjd",
-      id: "res123",
-      type: "PROSUMER",
-      cash: "alksdj",
-      energy: "alksdj"
-    };
-    let args = ["res123", JSON.stringify(resObj)];
-    fabService.invoke(randomUser, constants.createResident,  args)
-        .then((txID) =>{JSON.stringify(data)
-          expect(txID).to.match(/^([A-Fa-f0-9]{64})$/);
-          done()
-        })
-  })
+ it('Invoke chaincode', function(done){
+   //create args
+   let resObj = {
+     firstName: "junkName",
+     lastName: "lastJunk",
+     alias: "alskdj",
+     tokens: "alksjd",
+     id: "res123",
+     type: "PROSUMER",
+     cash: "alksdj",
+     energy: "alksdj"
+   };
+   let args = ["res123", JSON.stringify(resObj)];
+   fabService.invoke(randomUser, constants.createResident,  args)
+       .then((txID) =>{
+         expect(txID).to.match(/^([A-Fa-f0-9]{64})$/);
+         done()
+       })
+ })
 
-  it('Query created resident', function(done){
-    fabService.query(randomUser, constants.getResident, ["res123"])
-        .then((res) =>{
-          res = JSON.parse(res)
-          expect(res.firstName).to.equals('junkName')
-          done()
-        })
-  })
-})
+ it('Query created resident', function(done){
+   fabService.query(randomUser, constants.getResident, ["res123"])
+       .then((res) =>{
+         res = JSON.parse(res)
+         expect(res.firstName).to.equals('junkName')
+         done()
+       })
+ })
+})  
