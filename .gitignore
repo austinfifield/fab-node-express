@@ -1,4 +1,3 @@
-# Created by .ignore support plugin (hsz.mobi)
 ### Node template
 # Logs
 logs
@@ -57,7 +56,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+
 
 # next.js build output
 .next
