@@ -10,7 +10,8 @@ let residents = require('./src/CC/residents');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-let fabricRoute = require('./routes/fabric');
+let fabricRouter = require('./routes/fabric');
+let userRouter = require('./routes/user');
 
 
 
@@ -28,7 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/fabric', fabricRoute);
+app.use('/user', userRouter);
+app.use('/fabric', fabricRouter);
 
 
 

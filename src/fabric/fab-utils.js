@@ -129,7 +129,7 @@ function invokeChaincode(fcn, args, ccId, ccVer, client, channelName ){
 
             if(all_good){
                 //send off good proposal to orderers to get broadcasted
-                logger.debug("Sending off proposalResponses, ALL GOOT")
+                logger.debug("Sending off proposalResponses, ALL GOOD")
                 logger.debug(util.format('Successfully sent Proposal and received ProposalResponse: Status - %s, message - "%s", metadata - "%s"', proposalResponses[0].response.status, proposalResponses[0].response.message, proposalResponses[0].response.payload));
                 const request = {
                     proposalResponses: proposalResponses,

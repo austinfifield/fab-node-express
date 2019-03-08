@@ -8,7 +8,6 @@ const CP = fabConfig.CP;
 const CHAN = fabConfig.CHANNEL;
 let logger = require(`${appRoot}/src/config/winston`).getLogger(module);
 
-
 let client = Client.loadFromConfig(`${appRoot}/src/config/${CP}`);
 
 exports.query = function(user, fcn, args){
@@ -29,7 +28,9 @@ exports.query = function(user, fcn, args){
         return payload
       }, err =>{
         logger.error("query error : "+err);
+        
         throw new Error(err.message)
+        
       })
 };
 

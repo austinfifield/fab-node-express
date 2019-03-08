@@ -25,11 +25,6 @@ resObj = {
     "energy": energy
 }
 
-#post = requests.post("http://localhost:3000/users", json=resObj)
+post = requests.post("http://localhost:3000/users/", json=resObj)
 
-get = requests.post("http://localhost:3000/users/", json=resObj)
-
-# data = get.json()
-# print(data)
-# print(post)
-# print("Data recieved from Nodejs")
+print(post.text)
