@@ -10,9 +10,12 @@ let resObj = {}
 
 router.get("/", (req, res) => {
     let resident = req.body
-    fabService.query(resident.alias, constants.getResident, [resident.id])
+    fabService.query(resident.firstName, constants.getResident, [resident.id])
     .then(payload => {
-        res.send(payload)
+        res.send("User Queried: " + payload);
+    })
+    .catch((err) => {
+        res.send("error");
     })
 });
 

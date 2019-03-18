@@ -12,8 +12,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 let fabricRouter = require('./routes/fabric');
 let userRouter = require('./routes/user');
-
-
+let transactionsRouter = require('./routes/transactions');
 
 var app = express();
 
@@ -31,7 +30,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/user', userRouter);
 app.use('/fabric', fabricRouter);
-
+app.use('/transactions', transactionsRouter);
 
 
 

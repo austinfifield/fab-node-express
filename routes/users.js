@@ -27,11 +27,11 @@ router.post("/", (req, res) => {
         fabService.invoke(resident.alias, constants.createResident, args)
     })
     .then(() => {
-        res.send("success");
+        res.status(200).send("status 200, Resident " + resident.firstName + " " + resident.lastName + ", ALIAS: " + resident.alias);
+        res.status(500).send("status 500, failed")
+        res.status(404).send("status 404, failed")
     })
 
 });
-
-
 
 module.exports = router;
