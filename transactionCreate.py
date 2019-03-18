@@ -4,14 +4,12 @@ import sys
 
 source = sys.argv[1]
 sourceID = sys.argv[2]
-destination = sys.argv[3]
-destinationID = sys.argv[4]
-energyAmount = sys.argv[5]
+destinationID = sys.argv[3]
+energyAmount = sys.argv[4]
 
 resObj = {
     "source": source,
     "sourceID": sourceID,
-    "destination": destination,
     "destinationID": destinationID,
     "energyAmount": energyAmount
 }

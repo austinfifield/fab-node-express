@@ -20,35 +20,39 @@ router.post("/", (req, res) => {
     
     let source = {};
     let destination = {};
-
-
     let resident = req.body;
+
     fabService.query(resident.source, constants.getResident, [resident.sourceID])
     .then(payload => {
-        source = payload;
-    })
-    
-    .then( () => {
-        fabService.query(resident.destination, constants.getResident, [resident.destinationID])
+        source = JSON.parse(payload);
+        //console.log("first query here");
+        //res.send(payload);
+    }).then( () => {
+  
+        fabService.query(resident.source, constants.getResident, [resident.destinationID])
         .then(payload => {
-            destination = payload;
+            //console.log("second query here")
+            destination = JSON.parse(payload);
+        }).then( () => {
+            //console.log("script")
+            process.chdir('../fabric-network/networkup/docker/');
+            let time = Date.now();
+            //console.log(source.tokens)
+            console.log("./fabric.sh invoke defaultcc v1 '{\"Args\":[\"EnergyTokenTransaction\",\"{\\\"tokenInc\\\":\\\"" + source.tokens + "\\\",\\\"energyInc\\\":\\\"" + destination.energy + "\\\",\\\"rate\\\":\\\"0.83\\\",\\\"energyDec\\\":\\\"" + source.energy + "\\\",\\\"value\\\":\\\"5\\\",\\\"tokenDec\\\":\\\"" + destination.tokens + "\\\",\\\"transactionId\\\":\\\"transactionId\\\",\\\"timestamp\\\":\\\"2000-01-23T04:56:07.000+00:00\\\"}\"]}'")
+            shell.exec("./fabric.sh invoke defaultcc v1 '{\"Args\":[\"EnergyTokenTransaction\",\"{\\\"tokenInc\\\":\\\"" + source.tokens + "\\\",\\\"energyInc\\\":\\\"" + destination.energy + "\\\",\\\"rate\\\":\\\"0.83\\\",\\\"energyDec\\\":\\\"" + source.energy + "\\\",\\\"value\\\":\\\"5\\\",\\\"tokenDec\\\":\\\"" + destination.tokens + "\\\",\\\"transactionId\\\":\\\"transactionId\\\",\\\"timestamp\\\":\\\"" + time + "\\\"}\"]}'")
+         
+        })   .then( () => {
+            res.send("Success")
+        })    .catch((err) => {
+            res.send(err + " Error")
         })
+    
     })
 
-    .then( () => {
-        process.chdir('../fabric-network/networkup/docker/');
-        let time = Date.now();
-        shell.exec("./fabric.sh invoke defaultcc v1 '{\"Args\":[\"GetAllTran\"]}'");
-     
-    })
+ 
 
-    .then( () => {
-        res.send("Success")
-    })
+ 
 
-    .catch((err) => {
-        res.send(err + " Error")
-    })
 
 
     // resObj = {
