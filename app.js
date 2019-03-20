@@ -5,14 +5,14 @@ var cors = require('cors');
 var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
 const winston = require('./src/config/winston').getLogger(module);
-const constants = require('./src/constants')
-let residents = require('./src/CC/residents');
-
+//const constants = require('./src/constants')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 let fabricRouter = require('./routes/fabric');
 let userRouter = require('./routes/user');
-let transactionsRouter = require('./routes/transactions');
+let tradeRouter = require('./routes/trade');
+let produceRouter = require('./routes/produce');
+let consumeRouter = require('./routes/consume');
 
 var app = express();
 
@@ -30,7 +30,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/user', userRouter);
 app.use('/fabric', fabricRouter);
-app.use('/transactions', transactionsRouter);
+app.use('/trade', tradeRouter);
+app.use('/produce', produceRouter);
+app.use('/consume', consumeRouter);
 
 
 

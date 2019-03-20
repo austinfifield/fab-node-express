@@ -11,4 +11,4 @@ npm run test
 npm run start
 
 # open second terminal to feed data from server.py
-python3 server.py firstName lastName alias password tokens id etc...
+python3 comm.py

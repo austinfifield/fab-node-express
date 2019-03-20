@@ -10,9 +10,24 @@ let resObj = {}
 
 router.get("/", (req, res) => {
     let resident = req.body
-    fabService.query(resident.firstName, constants.getResident, [resident.id])
+    let token = {}
+    let energy = {}
+
+
+    fabService.query("admin", constants.getToken,[resident.idtok])
     .then(payload => {
-        res.send("User Queried: " + payload);
+        token = JSON.parse(payload)
+        
+
+        fabService.query("admin", constants.getEnergy,[resident.iden])
+        .then(payload => {
+            energy = JSON.parse(payload)
+        })
+        .then(() => {
+            res.send("Resident Token Balance: " + token.value + 
+            "\nResident Energy Balance: " + energy.value);
+        })
+
     })
     .catch((err) => {
         res.send("error");
