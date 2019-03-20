@@ -65,7 +65,7 @@ elif source != destination and destination != '0' and source != '0' and value !=
         "tokenDec": "idtok" + destination,
         "timestamp": "null"
     }
-    post = requests.post("http://localhost:3000/trade/", json=resObj)
+    post = requests.post("http://192.168.1.95:3000/trade/", json=resObj)
     print(post.text)
 
     
@@ -77,7 +77,7 @@ elif source != '0' and value == '0' and destination == '0':
     "idtok": "idtok" + source,
     "iden": "iden" + source
     }
-    get = requests.get("http://localhost:3000/user/", json=resObj)
+    get = requests.get("http://192.168.1.95:3000/user/", json=resObj)
     print(get.text)
 
 else:
