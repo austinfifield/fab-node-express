@@ -24,9 +24,9 @@ python3 comm.py arg1 arg2 arg3
   arg2 is the value/amount of energy being traded/consumed/produced
   arg3 is the 'destination' or 'buyer'
   
-if arg1 == arg3 then the house will produce energy from itself
-if arg3 == 0 then the source will cconsume energy
-if arg1 != arg3 and arg2 != 0 then the seller will transfer N energy to the buyer
+* if arg1 == arg3 then the house will produce energy from itself
+* if arg3 == 0 then the source will cconsume energy
+* if arg1 != arg3 and arg2 != 0 then the seller will transfer N energy to the buyer
 
 ### to query balances (House 1 for example)
 ```
