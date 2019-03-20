@@ -8,21 +8,26 @@ git clone https://github.com/httran13/fabric-network
 follow his readme
 
 ### Node SDK (above network must be up)
-### must use nodejs version 8.9.0
+### Must use nodejs version *8.9.0*
 ```
 nvm use 8.9.0 
 npm run test
 ```
 ### should pass the three tests
 
+### Start server
+```
+npm run dev
+```
+
 ### open second terminal to feed data from comm.py
 ```
 python3 comm.py arg1 arg2 arg3
 ```
   
-  arg1 is the 'source' or 'seller'
-  arg2 is the value/amount of energy being traded/consumed/produced
-  arg3 is the 'destination' or 'buyer'
+##### arg1 is the 'source' or 'seller'
+##### arg2 is the value/amount of energy being traded/consumed/produced
+##### arg3 is the 'destination' or 'buyer'
   
 * if arg1 == arg3 then the house will produce energy from itself
 * if arg3 == 0 then the source will cconsume energy
