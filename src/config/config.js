@@ -6,5 +6,5 @@ if(process.env.ENVIRONMENT === 'local'){
 }else if(process.env.ENVIRONMENT === 'devContainer'){
   CP = process.env.FABRIC_DOCKER_CP || 'cp-docker.json'
 }
-
+console.log(CP);
 module.exports = { CP:CP};

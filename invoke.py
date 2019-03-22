@@ -1,3 +1,44 @@
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+This script will invoke queries and/or transactions onto the blockchain
+
+To run:
+1. Make sure the SDK (node-express app) is running
+
+2. If running locally: 
+    - Make sure the fabric containers are running (docker ps to check)
+   If chaincode is running on a different machine than SDK
+    - Make sure you change the environment variable to "devContainer"
+    - Make sure you set all the IP's to point to the IP of the machine running the CC
+    - Make sure the CC is running on the machine (./fabric.sh upAll)
+
+3. In the command line (terminal) type:
+    python3 invoke.py arg1 arg2 arg3
+
+    where arg1 is the source
+    where arg2 is the value
+    where arg3 is the destination
+
+    example:
+
+    python3 invoke.py 1 0 0
+
+        will query "House 1" account balance (tokens + energy)
+
+    python3 invoke.py 2 100 3
+
+        will trade 100 energy from "House 2" to "House 3"
+
+    python3 invoke.py 1 10 0
+
+        will consume 10 energy from "House 1"
+
+    python3 invoke,py 3 20 3
+
+        will produce 20 energy for "House 3"
+        
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
 import requests
 import json
 import sys
@@ -20,7 +61,10 @@ elif source == '0':
 # if destination == 0
 # consume energy
 # update current houses energy to energy - N
-#------UNDER CONSTRUCTION----------
+
+#---------------------------------------
+#-----------UNDER CONSTRUCTION----------
+#---------------------------------------
 elif source != '0' and value != '0' and destination == '0':
     print("Consume Energy House #" + source)
     # resObj = {
@@ -38,7 +82,10 @@ elif source != '0' and value != '0' and destination == '0':
 # if source == destination
 # produce energy
 # update current house energy to energy + N
-#------UNDER CONSTRUCTION----------
+
+#---------------------------------------
+#-----------UNDER CONSTRUCTION----------
+#---------------------------------------
 elif source == destination and value != '0' and source != '0':
     print("Produce Energy House #" + source)
     # resObj = {
@@ -65,7 +112,8 @@ elif source != destination and destination != '0' and source != '0' and value !=
         "tokenDec": "idtok" + destination,
         "timestamp": "null"
     }
-    post = requests.post("http://192.168.1.95:3000/trade/", json=resObj)
+    post = requests.post("http://localhost:3000/trade/", json=resObj)
+
     print(post.text)
 
     
@@ -77,7 +125,7 @@ elif source != '0' and value == '0' and destination == '0':
     "idtok": "idtok" + source,
     "iden": "iden" + source
     }
-    get = requests.get("http://192.168.1.95:3000/user/", json=resObj)
+    get = requests.get("http://localhost:3000/user/", json=resObj)
     print(get.text)
 
 else:

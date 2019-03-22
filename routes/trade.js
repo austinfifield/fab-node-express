@@ -51,9 +51,8 @@ router.post("/", (req, res) => {
             }
         })
         .catch(err => {
-            res.send(err + " ERROR")
+            res.send(err)
         })
 });
-// this is a test push
- 
+
 module.exports = router;

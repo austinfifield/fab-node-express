@@ -75,3 +75,5 @@
 {\"owner\":\"owner\",\"ownerType\":\"Resident\",\"id\":\"idtok890\",\"value\":\"1000\"}
 {"owner":"owner","ownerType":"Resident","id":"idtok123","value":"1000"}
 {\"owner\":\"owner\",\"ownerType\":\"Resident\",\"id\":\"idtok123\",\"value\":\"1000\"}
+
+ docker logs -f peer0.org1.example.com
