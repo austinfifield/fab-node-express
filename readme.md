@@ -19,6 +19,7 @@ npm run test
 ```
 npm run dev
 ```
+### open second terminal to feed data from invoke.py, getTransactions.py, createUser.py, createAssets.py
 ## If fresh network (No residents or assets have been created)
 ### You will need to create residents through the SDK
 ```
@@ -35,11 +36,9 @@ python3 createAssets.py arg1 arg2 arg3 arg4
 * where arg3 is energy value
 * where arg4 is cash value
 
-### open second terminal to feed data from comm.py
 ```
 python3 invoke.py arg1 arg2 arg3
 ```
-  
 ##### arg1 is the 'source' or 'seller'
 ##### arg2 is the value/amount of energy being traded/consumed/produced
 ##### arg3 is the 'destination' or 'buyer'
