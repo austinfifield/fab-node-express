@@ -50,7 +50,7 @@ router.post("/", (req, res) => {
             })
 
             .then(() => {
-                res.send("Success");
+                res.send("Assets created:\n" + tokArgs + "\n" + enArgs + "\n" + cashArgs);
             })
             .catch(err => {
                 res.send(err);
