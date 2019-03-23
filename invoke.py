@@ -42,6 +42,7 @@ To run:
 import requests
 import json
 import sys
+from datetime import datetime
 
 source = sys.argv[1]
 value = sys.argv[2]
@@ -67,16 +68,16 @@ elif source == '0':
 #---------------------------------------
 elif source != '0' and value != '0' and destination == '0':
     print("Consume Energy House #" + source)
-    # resObj = {
-    #     "tokenInc": "idtok" + source,
-    #     "energyInc": "iden" + destination,
-    #     "rate": "1",
-    #     "energyDec" : "iden" + source,
-    #     "value": value,
-    #     "tokenDec": "idtok" + destination,
-    #     "timestamp": "null"
-    # }
-    # post = requests.post("http://localhost:3000/consume/", json=resObj)
+    resObj = {
+        "owner": "House" + source, # sets the owner of the asset to "House #". This is just for clarity and has no effect on network
+        "ownerType": "Resident",
+        "iden": "iden" + source,
+        "value": value,
+        "idres": "idres" + source 
+        #"timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:S')
+    }
+    post = requests.post("http://localhost:3000/consume/", json=resObj)
+    print(post.text)
 
 
 # if source == destination
@@ -88,16 +89,16 @@ elif source != '0' and value != '0' and destination == '0':
 #---------------------------------------
 elif source == destination and value != '0' and source != '0':
     print("Produce Energy House #" + source)
-    # resObj = {
-    #     "tokenInc": "idtok" + source,
-    #     "energyInc": "iden" + destination,
-    #     "rate": "1",
-    #     "energyDec" : "iden" + source,
-    #     "value": value,
-    #     "tokenDec": "idtok" + destination,
-    #     "timestamp": "null"
-    # }
-    # post = requests.post("http://localhost:3000/produce/", json=resObj)
+    resObj = {
+        "owner": "House" + source, # sets the owner of the asset to "House #". This is just for clarity and has no effect on network
+        "ownerType": "Resident",
+        "iden": "iden" + source,
+        "value": value,
+        "idres": "idres" + source 
+        #"timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:S')
+    }
+    post = requests.post("http://localhost:3000/produce/", json=resObj)
+    print(post.text)
 
 # if source != destination && destination != 0
 # trade energy
@@ -110,7 +111,7 @@ elif source != destination and destination != '0' and source != '0' and value !=
         "energyDec" : "iden" + source,
         "value": value,
         "tokenDec": "idtok" + destination,
-        "timestamp": "null"
+        "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:S')
     }
     post = requests.post("http://localhost:3000/trade/", json=resObj)
 
@@ -123,9 +124,11 @@ elif source != '0' and value == '0' and destination == '0':
     resObj = {
     "firstName": "admin",
     "idtok": "idtok" + source,
-    "iden": "iden" + source
+    "iden": "iden" + source,
+    "idcash": "idcash" + source,
+    "idres": "idres" + source
     }
-    get = requests.get("http://localhost:3000/user/", json=resObj)
+    get = requests.get("http://localhost:3000/assets/", json=resObj)
     print(get.text)
 
 else:

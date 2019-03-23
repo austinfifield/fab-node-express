@@ -8,9 +8,12 @@ let fabService = require(`${appRoot}/src/fabric/fabric-interface`);
 
 router.get("/", (req, res) => {
     let resident = req.body
-    fabService.query("admin", constants.getTransactions, [resident.id])
+    fabService.query("admin", constants.getTransactions, [resident.idres])
     .then(payload => {
         res.send("Transactions: " + payload);
+    })
+    .catch(err => {
+        res.send(err)
     })
 });
 
@@ -22,7 +25,6 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
 
     let buyer = {}
-    let seller = {}
     let balance;
     let cost;
 

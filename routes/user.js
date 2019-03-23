@@ -13,20 +13,13 @@ router.get("/", (req, res) => {
     let energy = {}
 
     // Query resident token balance
-    fabService.query("admin", constants.getToken,[resident.idtok])
+    fabService.query("admin", constants.getResident,[resident.idres])
     .then(payload => {
         token = JSON.parse(payload)
-        
-        // Query resident energy balance
-        fabService.query("admin", constants.getEnergy,[resident.iden])
-        .then(payload => {
-            energy = JSON.parse(payload)
-        })
-        .then(() => {
-            res.send("Resident Token Balance: " + token.value + 
-            "\nResident Energy Balance: " + energy.value);
-        })
-
+    })
+    .then(() => {
+        res.send("Resident Token Balance: " + token.value + 
+        "\nResident Energy Balance: " + energy.value);
     })
     .catch((err) => {
         res.send(err);
