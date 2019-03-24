@@ -6,9 +6,9 @@
   "client": {
     "organization": "Org1",
     "credentialStore": {
-      "path": "/tmp/hfc-kvs",
+      "path": "./tmp/hfc-kvs",
       "cryptoStore": {
-        "path": "/tmp/hfc-cvs"
+        "path": "./tmp/hfc-cvs"
       },
       "wallet": "wallet-name"
     }
@@ -45,7 +45,7 @@
   },
   "orderers": {
     "orderer.example.com": {
-      "url": "grpc://orderer.example.com:7050",
+      "url": "grpc://192.168.1.176:7050",
       "grpcOptions": {
         "ssl-target-name-override": "orderer.example.com",
         "grpc-max-send-message-length": 60000
@@ -57,16 +57,16 @@
   },
   "peers": {
     "peer0.org1.example.com": {
-      "url": "grpc://peer0.org1.example.com:7051",
-      "eventUrl": "grpc://peer0.org1.example.com:7053",
+      "url": "grpc://192.168.1.176:7051",
+      "eventUrl": "grpc://192.168.1.176:7053",
       "grpcOptions": {
         "ssl-target-name-override": "peer0.org1.example.com",
         "grpc.http2.keepalive_time": 15
       }
     },
     "peer0.org2.example.com": {
-      "url": "grpc://peer0.org2.example.com:8051",
-      "eventUrl": "grpc://peer0.org2.example.com:8053",
+      "url": "grpc://192.168.1.176:8051",
+      "eventUrl": "grpc://192.168.1.176:8053",
       "grpcOptions": {
         "ssl-target-name-override": "peer0.org2.example.com"
       }
@@ -74,7 +74,7 @@
   },
   "certificateAuthorities": {
     "ca-org1": {
-      "url": "http://capeerorg1:7054",
+      "url": "http://192.168.1.176:7054",
       "httpOptions": {
         "verify": true
       },
