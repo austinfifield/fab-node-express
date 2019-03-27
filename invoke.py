@@ -60,8 +60,8 @@ elif source == '0':
 
 
 # if destination == 0
-# consume energy
-# update current houses energy to energy - N
+# produce energy
+# update current houses energy to energy + N
 
 #---------------------------------------
 #-----------UNDER CONSTRUCTION----------
@@ -73,17 +73,16 @@ elif source != '0' and value != '0' and destination == '0':
         "ownerType": "Resident",
         "iden": "iden" + source,
         "value": value,
-        "idres": "idres" + source 
-        #"timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:S')
+        "idres": "idres" + source,
+        "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:S')
     }
-    post = requests.post("http://localhost:3000/consume/", json=resObj)
+    post = requests.post("http://localhost:3000/produce/", json=resObj)
     print(post.text)
 
 
 # if source == destination
-# produce energy
-# update current house energy to energy + N
-
+# consume energy
+# update current house energy to energy - N
 #---------------------------------------
 #-----------UNDER CONSTRUCTION----------
 #---------------------------------------
@@ -94,10 +93,10 @@ elif source == destination and value != '0' and source != '0':
         "ownerType": "Resident",
         "iden": "iden" + source,
         "value": value,
-        "idres": "idres" + source 
-        #"timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:S')
+        "idres": "idres" + source,
+        "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:S')
     }
-    post = requests.post("http://localhost:3000/produce/", json=resObj)
+    post = requests.post("http://localhost:3000/consume/", json=resObj)
     print(post.text)
 
 # if source != destination && destination != 0
@@ -114,8 +113,12 @@ elif source != destination and destination != '0' and source != '0' and value !=
         "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:S')
     }
     post = requests.post("http://localhost:3000/trade/", json=resObj)
-
     print(post.text)
+    if post.text != '-1':
+        ph1 = requests.post("http://192.168.1.235:3000/fabric", json=post.text) # my laptop
+        ph1 = requests.post("http://192.168.1.25:3000/fabric", json=post.text) # UDOO
+        ph1 = requests.post("http://192.168.1.8:3000/fabric", json=post.text) # Atom notebook
+        ph1 = requests.post("http://192.168.1.110:3000/fabric", json=post.text) # HP notebook
 
     
 # Query token house# 0 0

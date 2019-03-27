@@ -45,15 +45,19 @@ router.post("/", (req, res) => {
                 res.send("Insufficient funds!")
             }
             else {
+
+                
+
+
                 fabService.invoke("admin", constants.trade, args)
                 .then((txId) => {
                     console.log("transaction successful with txID: " + txId)
-                    res.send("transaction successful with txID: " + txId)
+                    res.send("success")
                 })
             }
         })
         .catch(err => {
-            res.send(err)
+            res.send('-1')
         })
 });
 
