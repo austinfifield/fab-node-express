@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   console.log(req.body);
-  res.send(req.body)
+  res.send("1 10 2")
 
 })
 

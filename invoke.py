@@ -114,11 +114,15 @@ elif source != destination and destination != '0' and source != '0' and value !=
     }
     post = requests.post("http://localhost:3000/trade/", json=resObj)
     print(post.text)
-    if post.text != '-1':
-        ph1 = requests.post("http://192.168.1.235:3000/fabric", json=post.text) # my laptop
-        ph1 = requests.post("http://192.168.1.25:3000/fabric", json=post.text) # UDOO
-        ph1 = requests.post("http://192.168.1.8:3000/fabric", json=post.text) # Atom notebook
-        ph1 = requests.post("http://192.168.1.110:3000/fabric", json=post.text) # HP notebook
+    #if post.text != '-1':
+        #ph1 = requests.post("http://localhost:3000/index", post.text) # my laptop
+        # ph2 = requests.post("http://192.168.1.25:3000/fabric", post.text) # UDOO
+        # ph3 = requests.post("http://192.168.1.8:3000/fabric", post.text) # Atom notebook
+        # ph4 = requests.post("http://192.168.1.110:3000/fabric", post.text) # HP notebook
+        # print(ph1.text)
+        # print(ph2.text)
+        # print(ph3.text)
+        # print(ph4.text)
 
     
 # Query token house# 0 0
@@ -133,6 +137,19 @@ elif source != '0' and value == '0' and destination == '0':
     }
     get = requests.get("http://localhost:3000/assets/", json=resObj)
     print(get.text)
+    
+    if get.text != '-1':
+        s = get.text.split("\"")
+        print(s[3])
+        print(s[7])
+        print(s[11])
+
+        obj = {
+            "token": s[3],
+            "energy": s[7],
+            "cash": s[11]
+        }
+        ph1 = requests.get("http://localhost:3000/index", json=obj)
 
 else:
     print("Nothing")

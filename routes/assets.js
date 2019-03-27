@@ -7,12 +7,13 @@ let fabService = require(`${appRoot}/src/fabric/fabric-interface`);
 
 let resObj = {}
 
-router.get("/", (req, res) => {
+router.post("/", (req, res) => {
     let resident = req.body
     let token = {}
     let energy = {}
     let cash = {}
-    
+    console.log("resident object:")
+    console.log(JSON.stringify(resident))
     // Query resident token balance
     fabService.query("admin", constants.getToken,[resident.idtok])
     // Promise to return payload
@@ -35,24 +36,29 @@ router.get("/", (req, res) => {
 
             // Sends data back to whomever requested it
             .then(() => {
-                res.send("Resident Token Balance: " + token.value + 
-                "\nResident Energy Balance: " + energy.value + 
-                "\nResident Cash Balance: " + cash.value);
+                    
+                detObj = {
+                    tokenValue: token.value,
+                    energyValue: energy.value,
+                    cashValue: cash.value
+                }
+
+                res.send(detObj);
             })
 
             .catch((err) => {
-                res.send(err);
+                res.send('-1');
             })
         })
     })
 
     .catch((err) => {
-        res.send(err);
+        res.send('-1');
     })
 });
 
 
-router.post("/", (req, res) => {
+router.get("/", (req, res) => {
     let resident = req.body;
 
     tokObj = {
