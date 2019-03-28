@@ -15,7 +15,7 @@ const WebSocket = require('ws')
 const port = new SerialPort('/dev/ttyACM0', { baudRate: 9600 });
 const parser = port.pipe(new Readline({ delimiter: '\n' }));
 const emitter = new EventEmitter();
-const socket = new WebSocket('ws://localhost:3000/')
+
 
 port.on("open", () => {
     console.log('Serial port /dev/ttyACM0 is open\n');
@@ -28,6 +28,7 @@ emitter.on('newTransactionRequest', function(){
 
 // Read the serial data on the port
 parser.on('data', data =>{
+  const socket = new WebSocket('ws://localhost:3000/')
   console.log('Data received on serial port: ', data);
 
 
