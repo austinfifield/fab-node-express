@@ -34,6 +34,7 @@ parser.on('data', data =>{
 
   // Split data string in to an array to print nice stuff in the terminal
   var transactionRequest = data.split(' ');
+
   if (transactionRequest[2] == 0){
     console.log('Producer: ', transactionRequest[0]);
     console.log('Energy: ', transactionRequest[1]);
@@ -43,14 +44,20 @@ parser.on('data', data =>{
     console.log('Energy: ', transactionRequest[1]);
     console.log('Seller: ', transactionRequest[2]);
   }
+  let source = transactionRequest[0].toString();
+  let value = transactionRequest[1].toString();
+  let destination = transactionRequest[2].toString();
 
+  console.log("source: " + source + " and is a: " + typeof(source))
+  console.log("value: " + value + " and is a: " + typeof(value))
+  console.log("destination: " + value + " and is a: " + typeof(value))
   //-------------START LOGIC--------------------------
 
   if(transactionRequest[0] == 0) {
     console.log("invalid request, no house 0");
   }
   else if(transactionRequest[0] != 0 && transactionRequest[1] == 0 && transactionRequest[2] == 0) {
-    let source = transactionRequest[0].toString();
+  console.log("INSIDE QUERY CONDITIONAL")
     resObj = {
       "firstName": "admin",
       "idtok": "idtok" + source,
@@ -59,11 +66,16 @@ parser.on('data', data =>{
       "idres": "idres" + source
     }
 
-    socket.onopen = function() {    
+    console.log("resObj:\n" + resObj + "\n")
+    
+    socket.onopen = function() { 
+      console.log("SENDING resObj!")   
       socket.send(JSON.stringify(resObj));
     }
 
   }
+
+  
 
   // Send transaction request data to the Websocket Server
   socket.onmessage = function(e) {
