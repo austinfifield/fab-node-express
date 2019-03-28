@@ -56,16 +56,13 @@ parser.on('data', data =>{
       "iden": "iden" + transactionRequest[0],
       "idcash": "idcash" + transactionRequest[0],
       "idres": "idres" + transactionRequest[0]
-  }
-  }
+    }
 
-    // Send data to websocket server on localhost:3000
-    
-    socket.onopen = function() {
-  
-      
+    socket.onopen = function() {    
       socket.send(JSON.stringify(resObj));
     };
+
+  }
 
   // Send transaction request data to the Websocket Server
   socket.onmessage = function(e) {

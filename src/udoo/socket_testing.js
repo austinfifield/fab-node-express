@@ -4,7 +4,7 @@
 */
 
 const WebSocket = require('ws')
-let socket;
+let socket = new WebSocket('ws://localhost:3000/');
 
 
 // Serial stream comming in...
@@ -22,7 +22,7 @@ if(serialObj.source == '0') {
 } 
 
 else if(serialObj.source != '0' && serialObj.value == '0' && serialObj.destination == '0') {
-    socket = new WebSocket('ws://localhost:3000/');
+    
     //console.log("Query")
     resObj = {
         "firstName": "admin",
