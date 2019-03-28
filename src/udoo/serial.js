@@ -50,17 +50,18 @@ parser.on('data', data =>{
     console.log("invalid request, no house 0");
   }
   else if(transactionRequest[0] != 0 && transactionRequest[1] == 0 && transactionRequest[2] == 0) {
+    let source = transactionRequest[0].toString();
     resObj = {
       "firstName": "admin",
-      "idtok": "idtok" + transactionRequest[0],
-      "iden": "iden" + transactionRequest[0],
-      "idcash": "idcash" + transactionRequest[0],
-      "idres": "idres" + transactionRequest[0]
+      "idtok": "idtok" + source,
+      "iden": "iden" + source,
+      "idcash": "idcash" + source,
+      "idres": "idres" + source
     }
 
     socket.onopen = function() {    
       socket.send(JSON.stringify(resObj));
-    };
+    }
 
   }
 
