@@ -66,7 +66,7 @@ parser.on('data', data =>{
       "idres": "idres" + source
     }
 
-    console.log("resObj:\n" + resObj + "\n")
+    console.log("resObj:\n" + JSON.stringify(resObj) + "\n")
     
     socket.onopen = function() { 
       console.log("SENDING resObj!")   
