@@ -62,6 +62,20 @@ wss.on('connection', function connection(ws) {
             console.log(err)
         })
     }
+    else if(obj.function == "consume"){
+        axios.post('http://localhost:3000/consume', {
+            owner: obj.owner,
+            ownerType: obj.ownerType,
+            iden: obj.iden,
+            value: obj.value,
+            idres: obj.idres
+        }).then(res => {
+            ws.send(JSON.stringify(obj.source + " " + obj.value + " " + source))
+            ws.send(JSON.stringify(obj.source + " " + res.data + " 0"))
+        }).catch(err => {
+            console.log(err)
+        })
+    }
         // In here is where the SDK should generate the transaction result before sending it
         // For now, this is just sending back a dummy transaction result
         

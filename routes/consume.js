@@ -58,8 +58,11 @@ router.post("/", (req, res) => {
                     res.send("Insufficient funds!")
                 }
                 else {
-                res.send(resident.owner + " Consumed " + consumed + " energy!")
+                res.send(resObj.value)
                 }
+            })
+            .catch(err => {
+                res.send(err)
             })
         })
 
