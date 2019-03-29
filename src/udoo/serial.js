@@ -55,6 +55,7 @@ parser.on('data', data =>{
     console.log("invalid request, no house 0");
   }
 
+  
   // Query asset balances
   else if(source != 0 && value == 0 && destination == 0) {
     console.log("Query function (serial.js)")
@@ -73,22 +74,6 @@ parser.on('data', data =>{
 
   }
 
-  // Produce function
-  else if(source != 0 && value != 0 && destination == 0) {
-    console.log("Produce function (serial.js)")
-    resObj = {
-      "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
-      "ownerType": "Resident",
-      "iden": "iden" + source,
-      "value": value,
-      "idres": "idres" + source,
-      "function": "produce",
-      "source": source
-    }    
-    socket.onopen = function() { 
-      socket.send(JSON.stringify(resObj));
-    }
-  }
 
   // Consume function
   else if(source == destination) {
@@ -106,6 +91,26 @@ parser.on('data', data =>{
       socket.send(JSON.stringify(resObj));
     }
   }
+
+
+  // Produce function
+  else if(source != 0 && value != 0 && destination == 0) {
+    console.log("Produce function (serial.js)")
+    resObj = {
+      "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
+      "ownerType": "Resident",
+      "iden": "iden" + source,
+      "value": value,
+      "idres": "idres" + source,
+      "function": "produce",
+      "source": source
+    }    
+    socket.onopen = function() { 
+      socket.send(JSON.stringify(resObj));
+    }
+  }
+
+
 
   
 
