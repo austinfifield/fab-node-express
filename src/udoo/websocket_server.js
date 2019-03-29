@@ -34,6 +34,7 @@ wss.on('connection', function connection(ws) {
         obj = JSON.parse(message)
 
         if(obj.function == "query"){
+            Console.log("QUERY FUNCTION")
         axios.post('http://localhost:3000/assets', {
             
                 firstName: "admin",
@@ -50,6 +51,7 @@ wss.on('connection', function connection(ws) {
         })
     }
     else if(obj.function == "produce"){
+        console.log("PRODUCE FUNCTION")
         axios.post('http://localhost:3000/produce', {
             owner: obj.owner,
             ownerType: obj.ownerType,

@@ -89,7 +89,7 @@ parser.on('data', data =>{
   }
 
   // Consume function
-  else if(transactionRequest[0] != 0 && transactionRequest[1] != 0 && transactionRequest[0] == transactionRequest[2]) {
+  else if(transactionRequest[0] != 0 && transactionRequest[1] != 0 && (transactionRequest[0] == transactionRequest[2])) {
     resObj = {
       "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
       "ownerType": "Resident",
