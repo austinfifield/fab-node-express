@@ -50,11 +50,10 @@ parser.on('data', data =>{
   let destination = transactionRequest[2].toString();
 
   //-------------START LOGIC--------------------------
-
+  console.log(source + "=" + destination)
   if(source == 0) {
     console.log("invalid request, no house 0");
   }
-
 
   // Query asset balances
   else if(source != 0 && value == 0 && destination == 0) {
@@ -73,10 +72,8 @@ parser.on('data', data =>{
     }
 
   }
-
-
   // Consume function
-  else if(source === destination) {
+  else if(source == destination) {
     console.log("Consume function (serial.js)")
     resObj = {
       "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
