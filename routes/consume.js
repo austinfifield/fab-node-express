@@ -26,7 +26,7 @@ router.post("/", (req, res) => {
         // simple logic to prevent negative balance
         if(currentBalance <= consumed) {
             newBalance = 0;
-            consumed = currentBalance
+            newBalance = currentBalance
         }
         else if(currentBalance > consumed) {
             newBalance = currentBalance - consumed;
