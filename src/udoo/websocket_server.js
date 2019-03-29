@@ -66,6 +66,7 @@ wss.on('connection', function connection(ws) {
     }
     else if(obj.function == "consume"){
         console.log("CONSUME FUNCTION")
+        let house = obj.source;
         axios.post('http://localhost:3000/consume', {
             owner: obj.owner,
             ownerType: obj.ownerType,
@@ -73,11 +74,11 @@ wss.on('connection', function connection(ws) {
             value: obj.value,
             idres: obj.idres
         }).then(res => {
-            ws.send(JSON.stringify(obj.source + " " + res.data + " 0"))
+            ws.send(JSON.stringify(house + " " + res.data + " 0"))
 
             
         }).then(() => {
-            ws.send(JSON.stringify(obj.source + " " + obj.value + " " + source))
+            ws.send(JSON.stringify(house + " " + obj.value + " " + source))
         })
         
         
