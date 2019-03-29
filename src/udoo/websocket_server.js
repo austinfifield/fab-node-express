@@ -63,6 +63,7 @@ wss.on('connection', function connection(ws) {
         })
     }
     else if(obj.function == "consume"){
+        console.log("CONSUME FUNCTION")
         axios.post('http://localhost:3000/consume', {
             owner: obj.owner,
             ownerType: obj.ownerType,

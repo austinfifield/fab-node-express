@@ -58,7 +58,7 @@ router.post("/", (req, res) => {
                     res.send("Insufficient funds!")
                 }
                 else {
-                res.send(resObj.value)
+                    res.send(resObj.value)
                 }
             })
             .catch(err => {
