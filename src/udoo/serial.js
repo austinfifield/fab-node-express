@@ -57,6 +57,7 @@ parser.on('data', data =>{
 
   // Query asset balances
   else if(transactionRequest[0] != 0 && transactionRequest[1] == 0 && transactionRequest[2] == 0) {
+    console.log("Query function (serial.js)")
     resObj = {
       "firstName": "admin",
       "idtok": "idtok" + source,
@@ -74,6 +75,7 @@ parser.on('data', data =>{
 
   // Produce function
   else if(transactionRequest[0] != 0 && transactionRequest[1] != 0 && transactionRequest[2] == 0) {
+    console.log("Produce function (serial.js)")
     resObj = {
       "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
       "ownerType": "Resident",
@@ -89,7 +91,8 @@ parser.on('data', data =>{
   }
 
   // Consume function
-  else if(transactionRequest[0] != 0 && transactionRequest[1] != 0 && (transactionRequest[0] == transactionRequest[2])) {
+  else if(transactionRequest[0] != 0 && transactionRequest[1] != 0 && (transactionRequest[0] === transactionRequest[2])) {
+    console.log("Consume function (serial.js)")
     resObj = {
       "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
       "ownerType": "Resident",
