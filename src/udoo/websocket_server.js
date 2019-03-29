@@ -30,8 +30,7 @@ server.on('request', app);
 // When server receives incoming data, print the data in terminal and send back the transaction result
 wss.on('connection', function connection(ws) {
     ws.on('message', function incoming(message) {
-        console.log("from socket_testing.js")
-        console.log(message)
+
         obj = JSON.parse(message)
 
         if(obj.function == "query"){
@@ -43,9 +42,7 @@ wss.on('connection', function connection(ws) {
                 idcash: obj.idcash,
                 idres: obj.idres
 
-        }).then(res => {
-            //console.log(res.data);
-            
+        }).then(res => {          
             ws.send(JSON.stringify(res.data))
         })
         .catch(err => {
@@ -60,7 +57,7 @@ wss.on('connection', function connection(ws) {
             value: obj.value,
             idres: obj.idres
         }).then(res => {
-            ws.send(JSON.stringify(res.data))
+            ws.send(JSON.stringify(ownder + " " + res))
         }).catch(err => {
             console.log(err)
         })

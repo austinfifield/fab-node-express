@@ -49,16 +49,12 @@ parser.on('data', data =>{
   let value = transactionRequest[1].toString();
   let destination = transactionRequest[2].toString();
 
-  console.log("source: " + source + " and is a: " + typeof(source))
-  console.log("value: " + value + " and is a: " + typeof(value))
-  console.log("destination: " + value + " and is a: " + typeof(value))
   //-------------START LOGIC--------------------------
 
   if(transactionRequest[0] == 0) {
     console.log("invalid request, no house 0");
   }
   else if(transactionRequest[0] != 0 && transactionRequest[1] == 0 && transactionRequest[2] == 0) {
-  console.log("INSIDE QUERY CONDITIONAL")
     resObj = {
       "firstName": "admin",
       "idtok": "idtok" + source,
@@ -89,7 +85,6 @@ parser.on('data', data =>{
     console.log("resObj:\n" + JSON.stringify(resObj) + "\n")
     
     socket.onopen = function() { 
-      console.log("SENDING resObj!")   
       socket.send(JSON.stringify(resObj));
     }
   }
