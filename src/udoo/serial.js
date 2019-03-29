@@ -63,11 +63,8 @@ parser.on('data', data =>{
       "idres": "idres" + source,
       "function": "query"
     }
-
-    console.log("resObj:\n" + JSON.stringify(resObj) + "\n")
     
     socket.onopen = function() { 
-      console.log("SENDING resObj!")   
       socket.send(JSON.stringify(resObj));
     }
 
@@ -80,10 +77,7 @@ parser.on('data', data =>{
       "value": value,
       "idres": "idres" + source,
       "function": "produce"
-    }
-
-    console.log("resObj:\n" + JSON.stringify(resObj) + "\n")
-    
+    }    
     socket.onopen = function() { 
       socket.send(JSON.stringify(resObj));
     }

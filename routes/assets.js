@@ -12,8 +12,6 @@ router.post("/", (req, res) => {
     let token = {}
     let energy = {}
     let cash = {}
-    console.log("resident object:")
-    console.log(JSON.stringify(resident))
     // Query resident token balance
     fabService.query("admin", constants.getToken,[resident.idtok])
     // Promise to return payload
@@ -47,13 +45,13 @@ router.post("/", (req, res) => {
             })
 
             .catch((err) => {
-                res.send('-1');
+                res.send(err);
             })
         })
     })
 
     .catch((err) => {
-        res.send('-1');
+        res.send(err);
     })
 });
 
