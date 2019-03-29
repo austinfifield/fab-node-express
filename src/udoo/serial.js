@@ -76,6 +76,23 @@ parser.on('data', data =>{
     }
 
   }
+  else if(transactionRequest[0] != 0 && transactionRequest[1] != 0 && transactionRequest[2] == 0) {
+    resObj = {
+      "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
+      "ownerType": "Resident",
+      "iden": "iden" + source,
+      "value": value,
+      "idres": "idres" + source,
+      "function": "produce"
+    }
+
+    console.log("resObj:\n" + JSON.stringify(resObj) + "\n")
+    
+    socket.onopen = function() { 
+      console.log("SENDING resObj!")   
+      socket.send(JSON.stringify(resObj));
+    }
+  }
 
   
 
