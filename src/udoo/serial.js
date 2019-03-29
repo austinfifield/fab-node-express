@@ -80,7 +80,8 @@ parser.on('data', data =>{
       "iden": "iden" + source,
       "value": value,
       "idres": "idres" + source,
-      "function": "produce"
+      "function": "produce",
+      "source": source
     }    
     socket.onopen = function() { 
       socket.send(JSON.stringify(resObj));
