@@ -73,21 +73,6 @@ parser.on('data', data =>{
 
   }
   // Consume function
-  else {
-    console.log("Consume function (serial.js)")
-    resObj = {
-      "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
-      "ownerType": "Resident",
-      "iden": "iden" + source,
-      "value": value,
-      "idres": "idres" + source,
-      "function": "consume",
-      "source": source
-    }    
-    socket.onopen = function() { 
-      socket.send(JSON.stringify(resObj));
-    }
-  }
 
 
   // Produce function
@@ -108,6 +93,21 @@ parser.on('data', data =>{
   }
 
 
+  else {
+    console.log("Consume function (serial.js)")
+    resObj = {
+      "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
+      "ownerType": "Resident",
+      "iden": "iden" + source,
+      "value": value,
+      "idres": "idres" + source,
+      "function": "consume",
+      "source": source
+    }    
+    socket.onopen = function() { 
+      socket.send(JSON.stringify(resObj));
+    }
+  }
 
   
 
