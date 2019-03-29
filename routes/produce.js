@@ -44,7 +44,7 @@ router.post("/", (req, res) => {
             let args = [resident.idres, JSON.stringify(resObj)];
             fabService.invoke("admin", constants.createEnergy, args)
             .then(() => {
-                res.send(resObj.value)
+                res.send(resObj.owner + " " + resObj.value)
             })
             .catch(err => {
                 res.send(err)

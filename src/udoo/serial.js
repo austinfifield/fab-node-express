@@ -54,6 +54,8 @@ parser.on('data', data =>{
   if(transactionRequest[0] == 0) {
     console.log("invalid request, no house 0");
   }
+
+  // Query asset balances
   else if(transactionRequest[0] != 0 && transactionRequest[1] == 0 && transactionRequest[2] == 0) {
     resObj = {
       "firstName": "admin",
@@ -69,6 +71,8 @@ parser.on('data', data =>{
     }
 
   }
+
+  // Produce function
   else if(transactionRequest[0] != 0 && transactionRequest[1] != 0 && transactionRequest[2] == 0) {
     resObj = {
       "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
