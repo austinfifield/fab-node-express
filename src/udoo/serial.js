@@ -64,7 +64,8 @@ parser.on('data', data =>{
       "idtok": "idtok" + source,
       "iden": "iden" + source,
       "idcash": "idcash" + source,
-      "idres": "idres" + source
+      "idres": "idres" + source,
+      "function": "query"
     }
 
     console.log("resObj:\n" + JSON.stringify(resObj) + "\n")

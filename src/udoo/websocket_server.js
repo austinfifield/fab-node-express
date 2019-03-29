@@ -34,6 +34,7 @@ wss.on('connection', function connection(ws) {
         console.log(message)
         obj = JSON.parse(message)
 
+        if(obj.function == "query"){
         axios.post('http://localhost:3000/assets', {
             
                 firstName: "admin",
@@ -50,7 +51,7 @@ wss.on('connection', function connection(ws) {
         .catch(err => {
             console.log(err)
         })
-
+    }
         // In here is where the SDK should generate the transaction result before sending it
         // For now, this is just sending back a dummy transaction result
         
