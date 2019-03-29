@@ -54,12 +54,7 @@ router.post("/", (req, res) => {
             let args = [resident.idres, JSON.stringify(resObj)];
             fabService.invoke("admin", constants.createEnergy, args)
             .then(() => {
-                if(currentBalance == '0'){
-                    res.send("Insufficient funds!")
-                }
-                else {
-                    res.send(resObj.value)
-                }
+                res.send(resObj.value)
             })
             .catch(err => {
                 res.send(err)
