@@ -34,7 +34,7 @@ wss.on('connection', function connection(ws) {
         obj = JSON.parse(message)
 
         if(obj.function == "query"){
-            Console.log("QUERY FUNCTION")
+            console.log("QUERY FUNCTION")
         axios.post('http://localhost:3000/assets', {
             
                 firstName: "admin",
