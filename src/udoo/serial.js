@@ -73,7 +73,7 @@ parser.on('data', data =>{
 
   }
   // Consume function
-  else if(source == destination) {
+  else {
     console.log("Consume function (serial.js)")
     resObj = {
       "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
