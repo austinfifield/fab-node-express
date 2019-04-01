@@ -11,6 +11,7 @@ const SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline');
 const EventEmitter = require('events');
 const WebSocket = require('ws')
+const tynt = require("tynt")
 
 const port = new SerialPort('/dev/ttyACM0', { baudRate: 9600 });
 const parser = port.pipe(new Readline({ delimiter: '\n' }));
@@ -18,11 +19,11 @@ const emitter = new EventEmitter();
 
 
 port.on("open", () => {
-    console.log('Serial port /dev/ttyACM0 is open\n');
+    console.log('Serial port /dev/ttyACM0 is op\033[\n');
   });
   
-// Display "New Transaction Request" when new serial data is received
-emitter.on('newTransactionRequest', function(){
+// Display "New Transaction Request" when new s\033[ial data is received
+emitter.on('newTransactionRequest', function(){\033[
   console.log('New Transaction Request\n');
 });
 
