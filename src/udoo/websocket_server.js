@@ -74,9 +74,9 @@ wss.on('connection', function connection(ws) {
                 idres: obj.idres
             }).then(res => {
                 ws.send(JSON.stringify(house + " " + res.data.newBalance + " 0"))
-                .then(() => {
-                    ws.send(JSON.stringify(house + " " + res.data.consumed + " " + house))
-                })
+                
+                ws.send(JSON.stringify(house + " " + res.data.consumed + " " + house))
+                
             })
             .catch(err => {
                 console.log(err)
