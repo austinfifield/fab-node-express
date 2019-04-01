@@ -14,7 +14,9 @@ router.post("/", (req, res) => {
     fabService.query("admin", constants.getEnergy,[resident.iden])
     // Promise to return payload
     .then(payload => {
-        res.send(JSON.parse(payload))
+        energy = JSON.parse(payload)
+        balance = JSON.parse(energy)
+        res.send(balance)
        
     })
     .catch((err) => {
