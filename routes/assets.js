@@ -9,22 +9,13 @@ let resObj = {}
 
 router.post("/", (req, res) => {
     let resident = req.body
-    let token = {}
-    let energy = {}
-    //let cash = {}
     
     // Query resident token balance
     fabService.query("admin", constants.energy,[resident.iden])
     // Promise to return payload
     .then(payload => {
-        token = JSON.parse(payload)
+        res.send(payload)
     })
-    // Synchronize queries so that it sends back correct data
-    .then(() => {
-       res.send(token) 
-    })
-    // Sends data back to whomever requested it
-
     .catch((err) => {
         res.send(err);
     })
