@@ -40,8 +40,8 @@ wss.on('connection', function connection(ws) {
                 idres: obj.idres
 
         }).then(res => {
-            console.log("RES.DATA " + res.data)      
-            ws.send(res.data)
+            console.log("RES.DATA " + JSON.stringify(res.data))      
+            ws.send(JSON.stringify(res.data))
         })
         .catch(err => {
             console.log(err)
