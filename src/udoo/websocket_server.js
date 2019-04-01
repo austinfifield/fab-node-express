@@ -34,7 +34,7 @@ wss.on('connection', function connection(ws) {
         obj = JSON.parse(message)
 
         if(obj.function == "query"){
-            console.log("QUERY FUNCTION")
+            console.log("console log: QUERY FUNCTION (from websocket_server.js")
         axios.post('http://localhost:3000/assets', {
             
                 firstName: "admin",
@@ -51,7 +51,7 @@ wss.on('connection', function connection(ws) {
         })
         }
         else if(obj.function == "produce"){
-            console.log("PRODUCE FUNCTION")
+            console.log("console log: PRODUCE FUNCTION (from websocket_server.js")
             axios.post('http://localhost:3000/produce', {
                 owner: obj.owner,
                 ownerType: obj.ownerType,
@@ -65,6 +65,7 @@ wss.on('connection', function connection(ws) {
             })
         }
         else {
+            console.log("console log: CONSUME FUNCTION (from websocket_server.js")
             let house = obj.source;
             axios.post('http://localhost:3000/consume', {
                 owner: obj.owner,
