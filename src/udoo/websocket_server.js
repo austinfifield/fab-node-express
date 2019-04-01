@@ -19,7 +19,7 @@ const axios = require('axios');
 const WebSocket = require('ws');
 const server = require('http').createServer();
 const app = require("../../app");
-const spawn = require("child_process").spawn;
+const tynt = require('tynt');
 const wss = new WebSocket.Server({
     server: server
 });
@@ -34,7 +34,7 @@ wss.on('connection', function connection(ws) {
         obj = JSON.parse(message)
 
         if(obj.function == "query"){
-            console.log("console log: QUERY FUNCTION (from websocket_server.js")
+            console.log(tynt.Green("console log: QUERY FUNCTION (from websocket_server.js"))
         axios.post('http://localhost:3000/assets', {
             
                 firstName: "admin",
@@ -51,7 +51,7 @@ wss.on('connection', function connection(ws) {
         })
         }
         else if(obj.function == "produce"){
-            console.log("console log: PRODUCE FUNCTION (from websocket_server.js")
+            console.log(tynt.Green("console log: PRODUCE FUNCTION (from websocket_server.js"))
             axios.post('http://localhost:3000/produce', {
                 owner: obj.owner,
                 ownerType: obj.ownerType,
@@ -65,7 +65,7 @@ wss.on('connection', function connection(ws) {
             })
         }
         else {
-            console.log("console log: CONSUME FUNCTION (from websocket_server.js")
+            console.log(tynt.Green("console log: CONSUME FUNCTION (from websocket_server.js"))
             let house = obj.source;
             axios.post('http://localhost:3000/consume', {
                 owner: obj.owner,
@@ -87,5 +87,5 @@ wss.on('connection', function connection(ws) {
 });
 
 server.listen(3000, function() {
-    console.log('listening to port 3000');
+    console.log(tynt.Green('listening to port 3000'));
 })

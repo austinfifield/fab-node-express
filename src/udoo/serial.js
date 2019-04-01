@@ -18,33 +18,33 @@ const emitter = new EventEmitter();
 
 
 port.on("open", () => {
-    console.log('Serial port /dev/ttyACM0 is open\n');
+    console.log(tynt.Blue('Serial port /dev/ttyACM0 is open\n'));
   });
   
 // Display "New Transaction Request" when new serial data is received
-emitter.on('newTransactionRequest', function(){
-  console.log('New Transaction Request\n');
+emitter.on(tynt.Blue('newTransactionRequest', function(){
+  console.log(tynt.Blue('New Transaction Request\n'));
 });
 
 // Read the serial data on the port
 parser.on('data', data =>{
   const socket = new WebSocket('ws://localhost:3000/')
-  console.log('Data received on serial port: ', data);
+  console.log(tynt.Blue('Data received on serial port: ', data));
 
 
 
   // Split data string in to an array to print nice stuff in the terminal
   var transactionRequest = data.split(' ');
 
-  if (transactionRequest[2] == 0){
-    console.log('Producer: ', transactionRequest[0]);
-    console.log('Energy: ', transactionRequest[1]);
-  }
-  else {
-    console.log('Buyer: ', transactionRequest[0]);
-    console.log('Energy: ', transactionRequest[1]);
-    console.log('Seller: ', transactionRequest[2]);
-  }
+  // if (transactionRequest[2] == 0){
+  //   console.log('Producer: ', transactionRequest[0]);
+  //   console.log('Energy: ', transactionRequest[1]);
+  // }
+  // else {
+  //   console.log('Buyer: ', transactionRequest[0]);
+  //   console.log('Energy: ', transactionRequest[1]);
+  //   console.log('Seller: ', transactionRequest[2]);
+  // }
   let source = transactionRequest[0].toString();
   let value = transactionRequest[1].toString();
   let destination = transactionRequest[2].toString();
@@ -52,7 +52,7 @@ parser.on('data', data =>{
   //-------------START LOGIC--------------------------
 
   if(source == 0) {
-    console.log("invalid request, no house 0");
+    console.log(tynt.Blue("invalid request, no house 0"));
   }
 
   // Query asset balances
@@ -77,7 +77,7 @@ parser.on('data', data =>{
 
   // Produce function
   else if(source != 0 && value != 0 && destination == 0) {
-    console.log("console log: Produce function (serial.js)")
+    console.log(tynt.Blue("console log: Produce function (serial.js)"))
     resObj = {
       "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
       "ownerType": "Resident",
@@ -94,7 +94,7 @@ parser.on('data', data =>{
 
 
   else {
-    console.log("console log: Consume function (serial.js)")
+    console.log(tynt.Blue("console log: Consume function (serial.js)"))
     resObj = {
       "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
       "ownerType": "Resident",
