@@ -11,7 +11,8 @@ router.post("/", (req, res) => {
     let resident = req.body
     let token = {}
     let energy = {}
-    let cash = {}
+    //let cash = {}
+    
     // Query resident token balance
     fabService.query("admin", constants.getToken,[resident.idtok])
     // Promise to return payload
@@ -24,32 +25,17 @@ router.post("/", (req, res) => {
         fabService.query("admin", constants.getEnergy,[resident.iden])
         .then(payload => {
             energy = JSON.parse(payload)
-    })
-        .then(() => {
-            // Query cash balance
-            fabService.query("admin", constants.getCash, [resident.idcash])
-            .then(payload => {
-                cash = JSON.parse(payload)
-            })
-
-            // Sends data back to whomever requested it
-            .then(() => {
-                    
-                detObj = {
-                    tokenValue: token.value,
-                    energyValue: energy.value,
-                    cashValue: cash.value
-                }
-
-                res.send(detObj);
-            })
-
-            .catch((err) => {
-                res.send(err);
-            })
         })
     })
-
+    // Sends data back to whomever requested it
+    .then(() => {
+                
+        detObj = {
+            tokenValue: token.value,
+            energyValue: energy.value,
+        }
+        res.send(detObj);
+    })
     .catch((err) => {
         res.send(err);
     })

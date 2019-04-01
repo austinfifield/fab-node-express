@@ -29,7 +29,7 @@ emitter.on('newTransactionRequest', function(){
 // Read the serial data on the port
 parser.on('data', data =>{
   const socket = new WebSocket('ws://localhost:3000/')
-  console.log(tynt.Blue('Data received on serial port: ', data));
+  console.log(tynt.Blue('Data received on serial port: ' + data));
 
 
 
