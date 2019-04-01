@@ -114,7 +114,7 @@ parser.on('data', data =>{
   // Send transaction request data to the Websocket Server
   socket.onmessage = function(e) {
   console.log('Transaction Result: ' + e.data + '\n');
-  port.write(parseInt(e.data) + '\n');
+  port.write(e.data + '\n');
 };
 
   // Trigger event for new data requests received on the serial port
