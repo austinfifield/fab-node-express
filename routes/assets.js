@@ -16,6 +16,7 @@ router.post("/", (req, res) => {
     .then(payload => {
         energy = JSON.parse(payload)
         .then(() => {
+            console.log("ENERGY VALUE: " + energy.value)
             res.send(energy.value)
         })
     })

@@ -39,8 +39,9 @@ wss.on('connection', function connection(ws) {
                 iden: obj.iden,
                 idres: obj.idres
 
-        }).then(res => {          
-            ws.send(parseInt(res.data))
+        }).then(res => {
+            console.log("RES.DATA " + res.data)      
+            ws.send(res.data)
         })
         .catch(err => {
             console.log(err)
