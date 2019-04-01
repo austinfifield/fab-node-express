@@ -65,32 +65,24 @@ wss.on('connection', function connection(ws) {
             })
         }
         else {
-        let house = obj.source;
-        axios.post('http://localhost:3000/consume', {
-            owner: obj.owner,
-            ownerType: obj.ownerType,
-            iden: obj.iden,
-            value: obj.value,
-            idres: obj.idres
-        }).then(res => {
-            ws.send(JSON.stringify(house + " " + res.data.newBalance + " 0"))
-            .then(() => {
-                ws.send(JSON.stringify(house + " " + res.data.consumed + " " + house))
-        })
-     
-        
-        .catch(err => {
-            console.log(err)
-        })
-    }
-        // In here is where the SDK should generate the transaction result before sending it
-        // For now, this is just sending back a dummy transaction result
-        
-        
-
-
-
-        });    
+            let house = obj.source;
+            axios.post('http://localhost:3000/consume', {
+                owner: obj.owner,
+                ownerType: obj.ownerType,
+                iden: obj.iden,
+                value: obj.value,
+                idres: obj.idres
+            }).then(res => {
+                ws.send(JSON.stringify(house + " " + res.data.newBalance + " 0"))
+                .then(() => {
+                    ws.send(JSON.stringify(house + " " + res.data.consumed + " " + house))
+                })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        }
+    });    
 });
 
 server.listen(3000, function() {
