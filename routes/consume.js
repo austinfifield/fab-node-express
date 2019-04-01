@@ -26,7 +26,7 @@ router.post("/", (req, res) => {
         // simple logic to prevent negative balance
         if(currentBalance <= consumed) {
             newBalance = 0;
-            newBalance = currentBalance
+            consumed = currentBalance;
         }
         else if(currentBalance > consumed) {
             newBalance = currentBalance - consumed;
@@ -54,7 +54,11 @@ router.post("/", (req, res) => {
             let args = [resident.idres, JSON.stringify(resObj)];
             fabService.invoke("admin", constants.createEnergy, args)
             .then(() => {
-                res.send(resObj.value)
+                transObj = {
+                    consumed: consumed,
+                    newBalance: newBalance
+                }
+                res.send(JSON.stringify(transObj))
             })
             .catch(err => {
                 res.send(err)

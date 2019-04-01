@@ -48,15 +48,15 @@ router.post("/", (req, res) => {
                 fabService.invoke("admin", constants.trade, args)
                 .then((txId) => {
                     console.log("transaction successful with txID: " + txId)
-                    res.send("success")
+                    res.send(txId)
                 })
-                .then(() => {
-                    axios.post()
+                .catch(err => {
+                    res.send(err)
                 })
             }
         })
         .catch(err => {
-            res.send('-1')
+            res.send(err)
         })
 });
 
