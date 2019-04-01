@@ -26,16 +26,17 @@ router.post("/", (req, res) => {
         .then(payload => {
             energy = JSON.parse(payload)
         })
+        .then(() => {
+            // Object to send back
+            detObj = {
+                tokenValue: token.value,
+                energyValue: energy.value,
+            }
+            res.send(detObj);
+        })
     })
     // Sends data back to whomever requested it
-    .then(() => {
-                
-        detObj = {
-            tokenValue: token.value,
-            energyValue: energy.value,
-        }
-        res.send(detObj);
-    })
+
     .catch((err) => {
         res.send(err);
     })
