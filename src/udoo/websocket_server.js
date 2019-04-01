@@ -49,23 +49,22 @@ wss.on('connection', function connection(ws) {
         .catch(err => {
             console.log(err)
         })
-    }
-    else if(obj.function == "produce"){
-        console.log("PRODUCE FUNCTION")
-        axios.post('http://localhost:3000/produce', {
-            owner: obj.owner,
-            ownerType: obj.ownerType,
-            iden: obj.iden,
-            value: obj.value,
-            idres: obj.idres
-        }).then(res => {
-            ws.send(JSON.stringify(obj.source + " " + res.data + " 0"))
-        }).catch(err => {
-            console.log(err)
-        })
-    }
-    else (obj.function == "consume"){
-        console.log("CONSUME FUNCTION")
+        }
+        else if(obj.function == "produce"){
+            console.log("PRODUCE FUNCTION")
+            axios.post('http://localhost:3000/produce', {
+                owner: obj.owner,
+                ownerType: obj.ownerType,
+                iden: obj.iden,
+                value: obj.value,
+                idres: obj.idres
+            }).then(res => {
+                ws.send(JSON.stringify(obj.source + " " + res.data + " 0"))
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+        else {
         let house = obj.source;
         axios.post('http://localhost:3000/consume', {
             owner: obj.owner,
@@ -74,15 +73,26 @@ wss.on('connection', function connection(ws) {
             value: obj.value,
             idres: obj.idres
         }).then(res => {
-            ws.send(JSON.stringify(house + " " + res.data.newBalance + " 0"))
+            if(res.data)
+            ws.send(JSON.stringify(house + " " + res.data + " 0"))
 
+            
         }).then(() => {
-            ws.send(JSON.stringify(house + " " + res.data.consumed + " " + house))
-
-        }).catch(err => {
+            ws.send(JSON.stringify(house + " " + obj.value + " " + house))
+        })
+        
+        
+        .catch(err => {
             console.log(err)
         })
     }
+        // In here is where the SDK should generate the transaction result before sending it
+        // For now, this is just sending back a dummy transaction result
+        
+        
+
+
+
         });    
 });
 
