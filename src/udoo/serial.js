@@ -57,7 +57,7 @@ parser.on('data', data =>{
 
   // Query asset balances
   else if(source != 0 && value == 0 && destination == 0) {
-    console.log(tynt.Blue("console log: Query function (serial.js)"))
+    console.log(tynt.Yellow("Query function (serial.js)"))
     resObj = {
       "firstName": "admin",
       "idtok": "idtok" + source,
@@ -77,7 +77,7 @@ parser.on('data', data =>{
 
   // Produce function
   else if(source != 0 && value != 0 && destination == 0) {
-    console.log(tynt.Blue("console log: Produce function (serial.js)"))
+    console.log(tynt.Green("Produce function (serial.js)"))
     resObj = {
       "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
       "ownerType": "Resident",
@@ -94,7 +94,7 @@ parser.on('data', data =>{
 
 
   else {
-    console.log(tynt.Blue("console log: Consume function (serial.js)"))
+    console.log(tynt.Red("Consume function (serial.js)"))
     resObj = {
       "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
       "ownerType": "Resident",
