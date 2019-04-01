@@ -11,7 +11,7 @@ router.post("/", (req, res) => {
     let resident = req.body
     
     // Query resident token balance
-    fabService.query("admin", constants.energy,[resident.iden])
+    fabService.query("admin", constants.getEnergy,[resident.iden])
     // Promise to return payload
     .then(payload => {
         res.send(payload)
