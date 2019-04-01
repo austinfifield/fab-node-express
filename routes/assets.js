@@ -14,26 +14,14 @@ router.post("/", (req, res) => {
     //let cash = {}
     
     // Query resident token balance
-    fabService.query("admin", constants.getToken,[resident.idtok])
+    fabService.query("admin", constants.energy,[resident.idtok])
     // Promise to return payload
     .then(payload => {
         token = JSON.parse(payload)
     })
     // Synchronize queries so that it sends back correct data
     .then(() => {
-        // Query energy balance
-        fabService.query("admin", constants.getEnergy,[resident.iden])
-        .then(payload => {
-            energy = JSON.parse(payload)
-        })
-        .then(() => {
-            // Object to send back
-            detObj = {
-                tokenValue: token.value,
-                energyValue: energy.value,
-            }
-            res.send(detObj);
-        })
+       res.send(token) 
     })
     // Sends data back to whomever requested it
 
