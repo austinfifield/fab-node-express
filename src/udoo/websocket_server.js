@@ -36,11 +36,7 @@ wss.on('connection', function connection(ws) {
         if(obj.function == "query"){
             console.log(tynt.Green("console log: QUERY FUNCTION (from websocket_server.js"))
         axios.post('http://localhost:3000/assets', {
-            
-                firstName: "admin",
-                idtok: obj.idtok,
                 iden: obj.iden,
-                idcash: obj.idcash,
                 idres: obj.idres
 
         }).then(res => {          
