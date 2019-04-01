@@ -15,9 +15,8 @@ router.post("/", (req, res) => {
     // Promise to return payload
     .then(payload => {
         energy = JSON.parse(payload)
-        currentBalance = parseInt(energy.value)
         .then(() => {
-            res.send(currentBalance)
+            res.send(energy.value)
         })
     })
     .catch((err) => {
