@@ -22,7 +22,7 @@ port.on("open", () => {
   });
   
 // Display "New Transaction Request" when new serial data is received
-emitter.on(tynt.Blue('newTransactionRequest', function(){
+emitter.on('newTransactionRequest', function(){
   console.log(tynt.Blue('New Transaction Request\n'));
 });
 
