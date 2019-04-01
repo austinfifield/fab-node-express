@@ -1,6 +1,9 @@
 # Hyperledger Fabric Network
 
 ### Prereq's
+Follow the steps under SDK in the documentation file
+
+## For running the chaincode and SDK locally (on the same machine)
 clone Huy's network
 ```
 git clone https://github.com/httran13/fabric-network
@@ -9,7 +12,10 @@ follow his readme
 
 ### Node SDK (above network must be up)
 ### Must use nodejs version *8.9.0*
+
 ```
+nvm install 8.9.0
+nvm alias default 8.9.0
 nvm use 8.9.0 
 npm run test
 ```
@@ -64,4 +70,24 @@ python3 invoke.py 1 10 0
 ### to produce energy (House 1 produces 10 energy)
 ```
 python3 invoke.py 1 10 1
+```
+## For running the chaincode on the cloud
+#### These steps are done on the cloud machine
+* Launch an ubuntu 16.04 or higher linux instance on AWS (or your prefered cloud service)
+* Install Hu
+
+#### These steps are done within the node app (SDK)
+* Change the environment variable from:
+```
+ENVIRONMENT = 'local'
+```
+* to:
+```
+ENVIRONMENT = 'devContainer'
+```
+* Edit the <app-root-directory>/src/config/cp-docker.json file with cloud instance's IP address
+* Run the websocket server and serial port reader (be inside root folder):
+```
+node ./src/udoo/websocket_server.js # Terminal 1
+node ./src/udoo/serial.js           # Terminal 2
 ```
