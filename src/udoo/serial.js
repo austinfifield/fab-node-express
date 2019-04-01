@@ -50,7 +50,7 @@ parser.on('data', data =>{
   let destination = transactionRequest[2].toString();
 
   //-------------START LOGIC--------------------------
-  console.log(source + "=" + destination)
+
   if(source == 0) {
     console.log("invalid request, no house 0");
   }
