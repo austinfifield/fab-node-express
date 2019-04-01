@@ -113,7 +113,7 @@ parser.on('data', data =>{
 
   // Send transaction request data to the Websocket Server
   socket.onmessage = function(e) {
-  console.log('Transaction Result: ' + e.data + '\n');
+  console.log('Transaction Result: ' + parseInt(e.data) + '\n');
   port.write(parseInt(e.data) + '\n');
 };
 
