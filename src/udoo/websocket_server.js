@@ -108,16 +108,16 @@ wss.on('connection', function connection(ws) {
                 // send new balance
                 ws.send(parseInt(obj.destination) + " " + parseInt(res.data.sellerBalance) + " " + 0)
                 
-                // switch(parseInt(obj.destination)) {
-                //     case 1: 
-                //         axios.post('http://10.216.67.101:3000/fabric', {
-                //         "balance": res.data.sellerBalance
-                //         })
-                //         break;
-                //     default:
-                //         console.log("default switch")
+                switch(parseInt(obj.destination)) {
+                    case 1: 
+                        axios.post('http://10.216.67.101:3000/fabric', {
+                        "balance": res.data.sellerBalance
+                        })
+                        break;
+                    default:
+                        console.log("default switch")
 
-                // }
+                }
             })
             .catch(err => {
                 console.log(err)
