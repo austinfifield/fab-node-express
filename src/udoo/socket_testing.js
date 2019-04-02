@@ -99,6 +99,7 @@ socket.onmessage = function(e) {
 };
 
 module.exports.newData = function(data) {
+    console.log("NEW DATA")
     console.log(data);
   }
 
