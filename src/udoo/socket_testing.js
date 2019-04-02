@@ -6,16 +6,14 @@
 const WebSocket = require('ws')
 let socket = new WebSocket('ws://localhost:3000/');
 
-
 // Serial stream comming in...
 // The serial data recieved is...
-let transactionRequest = ['1', '0', '0'];
+//let transactionRequest = ['1', '15', '0'];
 var serialObj = {
-    "source": transactionRequest[0],
-    "value": transactionRequest[1],
-    "destination": transactionRequest[2]
+    "source": String(process.argv[2]),
+    "value": String(process.argv[3]),
+    "destination": String(process.argv[4])
 }
-
 
 if(serialObj.source == '0') {
     console.log("invalid request");
@@ -75,12 +73,12 @@ else if(serialObj.source != '0' && serialObj.value != '0' && serialObj.destinati
 else if(serialObj.source != '0' && serialObj.value != '0' && serialObj.destination != serialObj.source && serialObj.source != '0'){
     console.log("TRADE FUNCTION (socket_testing.js)")
     resObj = {
-        "tokenInc": "idtok" + serialObj.source,
-        "energyInc": "iden" + serialObj.destination,
+        "tokenInc": "idtok" + serialObj.destination,
+        "energyInc": "iden" + serialObj.source,
         "rate": "1",
-        "energyDec" : "iden" + serialObj.source,
+        "energyDec" : "iden" + serialObj.destination,
         "value": serialObj.value,
-        "tokenDec": "idtok" + serialObj.destination,
+        "tokenDec": "idtok" + serialObj.source,
         "function": "trade",
         "timestamp": "2019",
         "source": serialObj.source,

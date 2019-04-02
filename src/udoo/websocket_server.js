@@ -75,11 +75,12 @@ wss.on('connection', function connection(ws) {
                 value: obj.value,
                 idres: obj.idres
             }).then(res => {
+                // send amount consumed
+                ws.send(parseInt(house) + " " + parseInt(res.data.consumed) + " " + parseInt(house))
                 // send new balance
                 ws.send(parseInt(house) + " " + parseInt(res.data.newBalance) + " " + 0)
                 
-                // send amount consumed
-                ws.send(parseInt(house) + " " + parseInt(res.data.consumed) + " " + parseInt(house))
+
             })
             .catch(err => {
                 console.log(err)
@@ -101,11 +102,12 @@ wss.on('connection', function connection(ws) {
                 "timestamp": "2019"
                 
             }).then(res => {
-                // send new balance
-                ws.send(parseInt(obj.source) + " " + parseInt(res.data.buyer) + " " + 0)
-                
                 // send amount consumed
-                ws.send(parseInt(obj.source) + " " + parseInt(res.data.seller) + " " + parseInt(obj.destination))
+                ws.send(parseInt(obj.source) + " " + parseInt(res.data.amountSold) + " " + parseInt(obj.destination))
+
+                // send new balance
+                ws.send(parseInt(obj.destination) + " " + parseInt(res.data.sellerBalance) + " " + 0)
+                
             })
             .catch(err => {
                 console.log(err)
