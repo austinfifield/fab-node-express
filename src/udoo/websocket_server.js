@@ -108,6 +108,9 @@ wss.on('connection', function connection(ws) {
                 // send new balance
                 ws.send(parseInt(obj.destination) + " " + parseInt(res.data.sellerBalance) + " " + 0)
                 
+                axios.post('http://10.216.67.101:3000/fabric', {
+                    "balance": res.data.sellerBalance
+                })
             })
             .catch(err => {
                 console.log(err)
