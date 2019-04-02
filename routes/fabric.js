@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const port = new SerialPort('/dev/ttyACM0', { baudRate: 9600 });
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
