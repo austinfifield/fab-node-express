@@ -7,6 +7,10 @@ const WebSocket = require('ws')
 let socket = new WebSocket('ws://localhost:3000/');
 let socket2 = new WebSocket('ws://localhost:3000/fabric')
 
+socket2.onopen = function() {
+    console.log("socket2 open")
+}
+ 
 // Serial stream comming in...
 // The serial data recieved is...
 //let transactionRequest = ['1', '15', '0'];
