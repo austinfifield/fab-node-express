@@ -105,11 +105,13 @@ parser.on('data', data =>{
   port.write(e.data + '\n');
   }
 
-  socket2.onmessage = function(e) {
-    ('Transaction Request (socket): ' + e.data + '\n');
-};
+
 
 
   // Trigger event for new data requests received on the serial port
   emitter.emit('newTransactionRequest');
 });
+
+module.exports.newData = function(data) {
+  console.log(data);
+}

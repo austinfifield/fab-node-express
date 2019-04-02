@@ -5,11 +5,7 @@
 
 const WebSocket = require('ws')
 let socket = new WebSocket('ws://localhost:3000/');
-let socket2 = new WebSocket('ws://10.216.67.101:3000/')
 
-socket2.onopen = function() {
-    console.log("socket2 open")
-}
  
 // Serial stream comming in...
 // The serial data recieved is...
@@ -100,15 +96,10 @@ else {
 
 socket.onmessage = function(e) {
     console.log('Transaction Result: ' + e.data);
-    socket2.onopen = function() {
-        socket2.send(e)
-    }
 };
 
-socket2.onmessage = function(e) {
-    console.log('Transaction Request(socket2): ' + e.data)
-}
-
-
+module.exports.newData = function(data) {
+    console.log(data);
+  }
 
 
