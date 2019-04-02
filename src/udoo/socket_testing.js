@@ -5,6 +5,7 @@
 
 const WebSocket = require('ws')
 let socket = new WebSocket('ws://localhost:3000/');
+let socket2 = new WebSocket('ws://localhost:3000/fabric')
 
 // Serial stream comming in...
 // The serial data recieved is...
@@ -96,6 +97,10 @@ else {
 socket.onmessage = function(e) {
     console.log('Transaction Result: ' + e.data);
 };
+
+socket2.onmessage = function(e) {
+    console.log('Transaction Request(socket2): ' + e.data)
+}
 
 
 
