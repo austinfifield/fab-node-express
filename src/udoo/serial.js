@@ -29,6 +29,7 @@ emitter.on('newTransactionRequest', function(){
 // Read the serial data on the port
 parser.on('data', data =>{
   const socket = new WebSocket('ws://localhost:3000/')
+  const socket2 = new WebSocket('ws://localhost:3000/fabric')
   console.log(tynt.Blue('Data received on serial port: ' + data));
 
 
@@ -102,7 +103,12 @@ parser.on('data', data =>{
   socket.onmessage = function(e) {
   console.log('Transaction Result: ' + e.data + '\n');
   port.write(e.data + '\n');
+  }
+
+  socket2.onmessage = function(e) {
+    ('Transaction Request (socket): ' + e.data + '\n');
 };
+
 
   // Trigger event for new data requests received on the serial port
   emitter.emit('newTransactionRequest');
