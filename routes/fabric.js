@@ -9,9 +9,9 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   console.log(req.body);
-  if(req.body != null){
-    serial.newData(req.body)
-  }
+  obj = JSON.stringify(req.body)
+  serial.newData(obj)
+  
 })
 
 module.exports = router;
