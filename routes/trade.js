@@ -24,40 +24,34 @@ router.get("/", (req, res) => {
 // Produce energy
 router.post("/", (req, res) => {
 
-    let buyer = {}
-    let balance;
-    let cost;
-
     // Recieve transaction data
     let resident = req.body
+
     let args = [JSON.stringify(resident)]
 
-    // Check balances
-    fabService.query("admin", constants.getToken, [resident.tokenDec])
-        .then((payload) => {
-            buyer = JSON.parse(payload)
-            balance = parseInt(buyer.value)
-            cost = parseInt(resident.value)
-            // res.send("Balance " + balance + 
-            //             "\nPrice " + cost)
-        }).then(() => {
-            if(balance < cost) {
-                res.send("Insufficient funds!")
-            }
-            else {
-                fabService.invoke("admin", constants.trade, args)
-                .then((txId) => {
-                    console.log("transaction successful with txID: " + txId)
-                    res.send(txId)
-                })
-                .catch(err => {
-                    res.send(err)
-                })
-            }
+    fabService.invoke("admin", constants.trade, args)
+    .then(() => {
+        fabService.query("admin", constants.getEnergy, [resident.energyInc])
+        .then((buyer) => {
+            buyerBalance = JSON.parse(buyer);
         })
-        .catch(err => {
-            res.send(err)
+        .then(() => {
+            fabService.query("admin", constants.getEnergy, [resident.energyDec])
+            .then(seller => {
+                sellerBalance = JSON.parse(seller);
+            })
+            .then(() => {
+                
+                transObj = {
+                    buyer: parseInt(buyerBalance.value) + parseInt(resident.value),
+                    seller: parseInt(sellerBalance.value) - parseInt(resident.value)
+                }
+                console.log(transObj)
+                res.send(JSON.stringify(transObj))
+            })
         })
+
+    })            
 });
 
 module.exports = router;

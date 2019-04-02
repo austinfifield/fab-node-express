@@ -32,20 +32,23 @@ wss.on('connection', function connection(ws) {
     ws.on('message', function incoming(message) {
 
         obj = JSON.parse(message)
-
+        
+        // QUERY
         if(obj.function == "query"){
             console.log(tynt.Green("console log: QUERY FUNCTION (from websocket_server.js"))
-        axios.post('http://localhost:3000/assets', {
+            axios.post('http://localhost:3000/assets', {
                 iden: obj.iden,
                 idres: obj.idres
 
-        }).then(res => {    
-            ws.send(JSON.stringify(res.data))
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            }).then(res => {
+                ws.send(JSON.stringify(res.data))
+            })
+            .catch(err => {
+                console.log(err)
+            })
         }
+
+        // PRODUCE
         else if(obj.function == "produce"){
             console.log(tynt.Green("console log: PRODUCE FUNCTION (from websocket_server.js"))
             axios.post('http://localhost:3000/produce', {
@@ -60,8 +63,10 @@ wss.on('connection', function connection(ws) {
                 console.log(err)
             })
         }
-        else {
-            console.log(tynt.Green("console log: CONSUME FUNCTION (from websocket_server.js"))
+
+        // CONSUME
+        else if (obj.function == "consume"){
+            console.log(tynt.Green("console log: CONSUME FUNCTION (from websocket_server.js)"))
             let house = obj.source;
             axios.post('http://localhost:3000/consume', {
                 owner: obj.owner,
@@ -70,15 +75,43 @@ wss.on('connection', function connection(ws) {
                 value: obj.value,
                 idres: obj.idres
             }).then(res => {
+                // send new balance
                 ws.send(parseInt(house) + " " + parseInt(res.data.newBalance) + " " + 0)
                 
+                // send amount consumed
                 ws.send(parseInt(house) + " " + parseInt(res.data.consumed) + " " + parseInt(house))
-                
             })
             .catch(err => {
                 console.log(err)
             })
         }
+
+        // TRADE
+        else if(obj.function == "trade") {
+            console.log(tynt.Green("console log: TRADE FUNCTION (from websocket_server.js)"))
+            axios.post('http://localhost:3000/trade', {
+                
+                "tokenInc": obj.tokenInc,
+                "energyInc": obj.energyInc,
+                "rate": "1",
+                "energyDec" : obj.energyDec,
+                "value": obj.value,
+                "tokenDec": obj.tokenDec,
+                "function": "trade",
+                "timestamp": "2019"
+                
+            }).then(res => {
+                // send new balance
+                ws.send(parseInt(obj.source) + " " + parseInt(res.data.buyer) + " " + 0)
+                
+                // send amount consumed
+                ws.send(parseInt(obj.source) + " " + parseInt(res.data.seller) + " " + parseInt(obj.destination))
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        }
+
     });    
 });
 

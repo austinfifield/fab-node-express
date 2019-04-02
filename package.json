@@ -6,6 +6,7 @@
     "start": "node ./bin/www",
     "test": "ENVIRONMENT=local mocha --timeout 10000 ./tests/integration/*.js",
     "dev": "nodemon node ./bin/www",
+    "socket": "nodemon node ./src/udoo/websocket_server.js",
     "kill": "fuser -n tcp -k 3000"
   },
   "engines": {

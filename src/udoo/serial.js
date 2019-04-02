@@ -36,15 +36,6 @@ parser.on('data', data =>{
   // Split data string in to an array to print nice stuff in the terminal
   var transactionRequest = data.split(' ');
 
-  // if (transactionRequest[2] == 0){
-  //   console.log('Producer: ', transactionRequest[0]);
-  //   console.log('Energy: ', transactionRequest[1]);
-  // }
-  // else {
-  //   console.log('Buyer: ', transactionRequest[0]);
-  //   console.log('Energy: ', transactionRequest[1]);
-  //   console.log('Seller: ', transactionRequest[2]);
-  // }
   let source = transactionRequest[0].toString();
   let value = transactionRequest[1].toString();
   let destination = transactionRequest[2].toString();
@@ -72,8 +63,6 @@ parser.on('data', data =>{
     }
 
   }
-  // Consume function
-
 
   // Produce function
   else if(source != 0 && value != 0 && destination == 0) {
@@ -92,7 +81,7 @@ parser.on('data', data =>{
     }
   }
 
-
+  // Consume function
   else {
     console.log(tynt.Red("Consume function (serial.js)"))
     resObj = {
@@ -108,8 +97,6 @@ parser.on('data', data =>{
       socket.send(JSON.stringify(resObj));
     }
   }
-
-  
 
   // Send transaction request data to the Websocket Server
   socket.onmessage = function(e) {
