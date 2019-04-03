@@ -98,9 +98,4 @@ socket.onmessage = function(e) {
     console.log('Transaction Result: ' + e.data);
 };
 
-module.exports.newData = function(data) {
-    console.log("NEW DATA")
-    console.log(data);
-  }
-
 

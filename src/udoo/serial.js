@@ -111,7 +111,3 @@ parser.on('data', data =>{
   // Trigger event for new data requests received on the serial port
   emitter.emit('newTransactionRequest');
 });
-
-module.exports.newData = function(data) {
-  console.log(data);
-}

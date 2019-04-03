@@ -110,8 +110,15 @@ wss.on('connection', function connection(ws) {
                 
                 switch(parseInt(obj.destination)) {
                     case 1: 
-                        axios.post('http://10.216.67.101:3000/fabric', {
-                        "balance": res.data.sellerBalance
+                        console.log("case 1")
+                        axios.post('http://192.168.1.110:3000/fabric', {
+                        balance: res.data.sellerBalance
+                        })
+                        .then(res => {
+                            console.log(res)
+                        })
+                        .catch(err => {
+                            console.log(err)
                         })
                         break;
                     default:
