@@ -1,12 +1,6 @@
-/* 
-    This is a test script for WebSocket functionality development
-    You can ignore it, it will be thrown away
-*/
-
 const WebSocket = require('ws')
 let socket = new WebSocket('ws://localhost:3000/');
 
- 
 // Serial stream comming in...
 // The serial data recieved is...
 //let transactionRequest = ['1', '15', '0'];
