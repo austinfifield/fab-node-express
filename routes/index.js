@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const spawn = require('child_process').spawn;
+let shell = require('shelljs')
 
 
 /* GET users listing. */
@@ -13,7 +13,8 @@ router.post('/', function(req, res, next) {
   
   obj = JSON.stringify(req.body)
   console.log(req.body)
-  ls = spawn('python', ['invoke.py', '1', '0', '0']);
+  shell.exec("python3 ../invoke.py 1 0 0")
+
 })
 
 module.exports = router;

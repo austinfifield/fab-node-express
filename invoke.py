@@ -135,22 +135,9 @@ elif source != '0' and value == '0' and destination == '0':
     "idcash": "idcash" + source,
     "idres": "idres" + source
     }
-    get = requests.get("http://localhost:3000/assets/", json=resObj)
+    get = requests.post("http://localhost:3000/assets/", json=resObj)
     print(get.text)
     
-    if get.text != '-1':
-        s = get.text.split("\"")
-        print(s[3])
-        print(s[7])
-        print(s[11])
-
-        obj = {
-            "token": s[3],
-            "energy": s[7],
-            "cash": s[11]
-        }
-        ph1 = requests.get("http://localhost:3000/index", json=obj)
-
 else:
     print("Nothing")
 
