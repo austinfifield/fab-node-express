@@ -8,7 +8,7 @@
 
 /*
     Functionality still needed:
-    - Integration of getting account balances from blockchain, performing logic, and invoking blockchain
+    - Integration of getting account balanconst WebSocket = require('ws')ces from blockchain, performing logic, and invoking blockchain
     to generate the transaction result data (the beef of the SDK)
     - It should not only send transaction result data back to the requesting client,
     but also to every udoo. This ensures energy sellers get their account balances updated on LCD
@@ -32,7 +32,7 @@ wss.on('connection', function connection(ws) {
     ws.on('message', function incoming(message) {
 
         obj = JSON.parse(message)
-        
+        console.log(message)
         // QUERY
         if(obj.function == "query"){
             console.log(tynt.Green("console log: QUERY FUNCTION (from websocket_server.js"))
