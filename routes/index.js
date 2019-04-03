@@ -1,30 +1,18 @@
 var express = require('express');
 var router = express.Router();
-
-/* GET home page. */
+let data = require('../src/udoo/getData')
+/* GET users listing. */
 router.get('/', function(req, res, next) {
-
-  let obj = req.body
-
-  res.render('index',{
-    title: 'Account Balances',
-    balances: {
-      energy: obj.energy,
-      token: obj.token,
-      cash: obj
-    },
-    
-    Residents: {
-      one: "House 1",
-      two: "House 2",
-      three: "House 3",
-      four: "House 4",
-      five: "House 5",
-      six: "House 6"
-    }
-  
-  });
-
+  res.send('respond with a resource');
 });
+
+
+router.post('/', function(req, res, next) {
+  
+  obj = JSON.stringify(req.body)
+  console.log(req.body)
+  
+  
+})
 
 module.exports = router;

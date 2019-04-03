@@ -111,7 +111,7 @@ wss.on('connection', function connection(ws) {
                 switch(parseInt(obj.destination)) {
                     case 1: 
                         console.log("case 1")
-                        axios.post('http://192.168.1.110:3000/fabric', {
+                        axios.post('http://192.168.1.110:3000/index', {
                         balance: res.data.sellerBalance
                         })
                         .then(res => {
