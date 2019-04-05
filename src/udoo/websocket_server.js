@@ -28,7 +28,7 @@ const wss = new WebSocket.Server({
 server.on('request', app);
 
 // When server receives incoming data, print the data in terminal and send back the transaction result
-wss.on('connection', function connection(ws) {
+wss.on('connection', function connection(ws, req) {
 
     const location = url.parse(req.url, true);
 
