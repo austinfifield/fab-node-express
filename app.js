@@ -13,6 +13,7 @@ let produceRouter = require('./routes/produce');
 let consumeRouter = require('./routes/consume');
 let assetsRouter = require('./routes/assets');
 
+
 var app = express();
 
 // view engine setup
@@ -32,6 +33,7 @@ app.use('/trade', tradeRouter);
 app.use('/produce', produceRouter);
 app.use('/consume', consumeRouter);
 app.use('/assets', assetsRouter);
+
 
 
 

@@ -11,8 +11,6 @@ router.post('/', function(req, res, next) {
   
   obj = JSON.stringify(req.body)
   console.log(req.body)
-  
-  
 })
 
 module.exports = router;

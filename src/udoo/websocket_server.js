@@ -17,13 +17,12 @@
 
 const axios = require('axios');
 const WebSocket = require('ws');
-const server = require('http').createServer();
 const app = require("../../app");
+const server = require('http').createServer();
 const tynt = require('tynt');
 const wss = new WebSocket.Server({
     server: server
 });
-
 
 server.on('request', app);
 
@@ -113,7 +112,7 @@ wss.on('connection', function connection(ws, req) {
                 switch(parseInt(obj.destination)) {
                     case 1: 
                         console.log("case 1")
-                        axios.post('http://192.168.1.110:3000/', {
+                        axios.post('http://192.168.1.110:3000/fabric', {
                         balance: res.data.sellerBalance
                         })
                         .then(res => {
@@ -138,4 +137,5 @@ wss.on('connection', function connection(ws, req) {
 
 server.listen(3000, function() {
     console.log(tynt.Green('listening to port 3000'));
-})
+});
+
