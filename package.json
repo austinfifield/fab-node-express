@@ -6,6 +6,7 @@
     "start": "node ./bin/www",
     "test": "ENVIRONMENT=local mocha --timeout 10000 ./tests/integration/*.js",
     "dev": "nodemon node ./bin/www",
+    "socket": "nodemon node ./src/udoo/websocket_server.js",
     "kill": "fuser -n tcp -k 3000"
   },
   "engines": {
@@ -27,7 +28,11 @@
     "http-errors": "~1.6.2",
     "morgan": "^1.9.1",
     "pug": "2.0.0-beta11",
-    "winston": "^3.2.1"
+    "serialport": "^7.1.4",
+    "shelljs": "^0.8.3",
+    "tynt": "^1.2.0",
+    "winston": "^3.2.1",
+    "ws": "^6.2.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

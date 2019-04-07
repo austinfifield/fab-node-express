@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+let data = require('../src/udoo/getData')
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
@@ -8,9 +8,9 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/', function(req, res, next) {
-  console.log(req.body);
-  res.send(req.body)
-
+  
+  obj = JSON.stringify(req.body)
+  console.log(req.body)
 })
 
 module.exports = router;
