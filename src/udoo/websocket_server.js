@@ -10,7 +10,7 @@
     Functionality still needed:
     - Integration of getting account balanconst WebSocket = require('ws')ces from blockchain, performing logic, and invoking blockchain
     to generate the transaction result data (the beef of the SDK)
-    - It should not only send transaction result data back to the requesting client,
+    - It should not only send transaction result dconst app = require("../../app");ata back to the requesting client,
     but also to every udoo. This ensures energy sellers get their account balances updated on LCD
     - Without this functionality, seller account balances won't update on LCD until THEY request a new transaction (not good)
 */
