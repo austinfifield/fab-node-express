@@ -1,17 +1,15 @@
 const app = require("../../app");
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+var express = require('express');
+var router = express.Router();
+
+app.io = io;
 
 
-app.post('/socket', (req, res) => {
+router.post('/socket', (req, res) => {
 
-    console.log(req.body);
-    res.status(200).send("Success");
-    res.status(201).send("Created");
-    res.status(202).send("Accepted");
-    res.status(404).send("Not found");
-
-    socket.emit('clientEvent', "post")
+    req.app.io.emit('tx')
 })
 
 io.on('connection', socket => {
@@ -26,3 +24,6 @@ io.on('connection', socket => {
 http.listen(3000, () => {
     console.log("listening to port 3000");
 })
+
+
+module.exports = router;

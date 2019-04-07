@@ -92,4 +92,8 @@ socket.onmessage = function(e) {
     console.log('Transaction Result: ' + e.data);
 };
 
-
+module.exports = {
+    getData: function(data) {
+        console.log("This is inside socket_testing" + data);
+    }
+}

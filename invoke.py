@@ -53,7 +53,7 @@ test = {
     "data": "5"
 }
 
-test = requests.post("http://localhost:3000", json=test)
+test = requests.post("http://localhost:3000/socket", json=test)
 print(test.text)
 
 # if source == 0

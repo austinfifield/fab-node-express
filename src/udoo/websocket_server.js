@@ -116,7 +116,7 @@ wss.on('connection', function connection(ws, req) {
                         balance: res.data.sellerBalance
                         })
                         .then(res => {
-                            console.log(res)    
+                            console.log("success")    
                         })
                         .catch(err => {
                             console.log(err)
