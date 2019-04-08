@@ -82,8 +82,28 @@ parser.on('data', data =>{
     }
   }
 
+    // Trade function
+    // else if(source != 0 && value != 0 && destination != source) {
+    //   console.log(tynt.Red("Trade function (serial.js)"))
+    //   resObj = {
+    //     "tokenInc": "idtok" + destination,
+    //     "energyInc": "iden" + source,
+    //     "rate": "1",
+    //     "energyDec" : "iden" + destination,
+    //     "value": value,
+    //     "tokenDec": "idtok" + source,
+    //     "function": "trade",
+    //     "timestamp": "2019",
+    //     "source": source,
+    //     "destination": destination
+    // }
+    //   socket.onopen = function() { 
+    //     socket.send(JSON.stringify(resObj));
+    //   }  
+    // }
+
   // Consume function
-  else if(source != 0 && value != 0 && destination == transactionRequest[2]){
+  else if(source != 0 && value != 0 && destination == source){
     console.log(tynt.Red("Consume function (serial.js)"))
     resObj = {
       "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
@@ -99,25 +119,10 @@ parser.on('data', data =>{
     }
   }
 
-    // Trade function
-    else {
-      console.log(tynt.Red("Trade function (serial.js)"))
-      resObj = {
-        "tokenInc": "idtok" + destination,
-        "energyInc": "iden" + source,
-        "rate": "1",
-        "energyDec" : "iden" + destination,
-        "value": value,
-        "tokenDec": "idtok" + source,
-        "function": "trade",
-        "timestamp": "2019",
-        "source": source,
-        "destination": destination
-    }
-      socket.onopen = function() { 
-        socket.send(JSON.stringify(resObj));
-      }  
-    }
+  else {
+    console.log(tynt.Red("INVALID CHOICE"));
+  }
+
   // Send transaction request data to the Websocket Server
   socket.onmessage = function(e) {
   console.log('Transaction Result: ' + e.data + '\n');
