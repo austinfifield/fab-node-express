@@ -85,7 +85,7 @@ parser.on('data', data =>{
   }
 
     // Consume function
-    else if(source != 0 && value != 0 && source == destination + "\r"){
+    else if(source != 0 && value != 0 && parseInt(source) == parseInt(destination)){
       console.log(tynt.Red("Consume function (serial.js)"))
       resObj = {
         "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
@@ -103,7 +103,7 @@ parser.on('data', data =>{
 
 
     // Trade function
-    else if(source != 0 && value != 0 && destination != parseInt(source)) {
+    else if(source != 0 && value != 0 && parseInt(destination) != parseInt(source)) {
       console.log(tynt.Red("Trade function (serial.js)"))
       resObj = {
         "tokenInc": "idtok" + destination,
