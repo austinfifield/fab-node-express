@@ -132,13 +132,12 @@ parser.on('data', data =>{
 
   // Trigger event for new data requests received on the serial port
   emitter.emit('newTransactionRequest');
-
-  module.exports = {
-    getData: function(data) {
-        console.log("from serial.js: " + data.source + " " + data.value);
-        port.write("6 10 0");
-    }
-  }
   
 });
 
+module.exports = {
+  getData: function(data) {
+      console.log("from serial.js: " + data.source + " " + data.value);
+      port.write("6 10 0");
+  }
+}
