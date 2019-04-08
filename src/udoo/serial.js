@@ -41,7 +41,6 @@ parser.on('data', data =>{
   let value = transactionRequest[1].toString();
   let destination = transactionRequest[2].toString();
   destination = parseInt(destination);
-  console.log(destination);
 
   //-------------START LOGIC--------------------------
 
@@ -84,22 +83,7 @@ parser.on('data', data =>{
     }
   }
 
-    // Consume function
-    else if(source != 0 && value != 0 && parseInt(source) == parseInt(destination)){
-      console.log(tynt.Red("Consume function (serial.js)"))
-      resObj = {
-        "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
-        "ownerType": "Resident",
-        "iden": "iden" + source,
-        "value": value,
-        "idres": "idres" + source,
-        "function": "consume",
-        "source": source
-      }    
-      socket.onopen = function() { 
-        socket.send(JSON.stringify(resObj));
-      }
-    }
+
 
 
     // Trade function
@@ -124,10 +108,22 @@ parser.on('data', data =>{
 
 
 
-  else {
-    console.log(tynt.Red("INVALID CHOICE"));
-  }
-
+    // Consume function
+    else{
+      console.log(tynt.Red("Consume function (serial.js)"))
+      resObj = {
+        "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
+        "ownerType": "Resident",
+        "iden": "iden" + source,
+        "value": value,
+        "idres": "idres" + source,
+        "function": "consume",
+        "source": source
+      }    
+      socket.onopen = function() { 
+        socket.send(JSON.stringify(resObj));
+      }
+    }
   // Send transaction request data to the Websocket Server
   socket.onmessage = function(e) {
   console.log('Transaction Result: ' + e.data + '\n');
