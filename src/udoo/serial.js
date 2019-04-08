@@ -40,6 +40,7 @@ parser.on('data', data =>{
   let source = transactionRequest[0].toString();
   let value = transactionRequest[1].toString();
   let destination = transactionRequest[2].toString();
+  console.log(destination);
 
   //-------------START LOGIC--------------------------
 
