@@ -83,7 +83,7 @@ parser.on('data', data =>{
   }
 
   // Consume function
-  else if(source != 0 && value != 0 && destination == source){
+  else if(source != 0 && value != 0 && destination == transactionRequest[2]){
     console.log(tynt.Red("Consume function (serial.js)"))
     resObj = {
       "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
