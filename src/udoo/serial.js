@@ -101,7 +101,7 @@ parser.on('data', data =>{
 
   // Trade function
   else if(source != 0 && value != 0 && destination != source && source != 0) {
-    console.log(tynt.Orange("Consume function (serial.js)"))
+    console.log(tynt.Red("Trade function (serial.js)"))
     resObj = {
       "tokenInc": "idtok" + serialObj.destination,
       "energyInc": "iden" + serialObj.source,
