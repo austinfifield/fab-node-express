@@ -10,7 +10,7 @@
     Functionality still needed:
     - Integration of getting account balanconst WebSocket = require('ws')ces from blockchain, performing logic, and invoking blockchain
     to generate the transaction result data (the beef of the SDK)
-    - It should not only send transaction result data back to the requesting client,
+    - It should not only send transaction result dconst app = require("../../app");ata back to the requesting client,
     but also to every udoo. This ensures energy sellers get their account balances updated on LCD
     - Without this functionality, seller account balances won't update on LCD until THEY request a new transaction (not good)
 */
@@ -110,20 +110,91 @@ wss.on('connection', function connection(ws, req) {
                 ws.send(parseInt(obj.destination) + " " + parseInt(res.data.sellerBalance) + " " + 0)
                 
                 switch(parseInt(obj.destination)) {
-                    case 1: 
-                        console.log("case 1")
-                        axios.post('http://192.168.1.110:3000/fabric', {
-                        balance: res.data.sellerBalance
+                    case 1: // House 1
+                        console.log("House 1")
+                        axios.post('http://192.168.1.101:3000/fabric', {
+                            source: parseInt(obj.destination),
+                            value: res.data.sellerBalance
                         })
                         .then(res => {
-                            console.log(res)    
+                            console.log("success")    
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                        break;
+
+                    case 2: // House 2
+                        console.log("House 2")
+                        axios.post('http://192.168.1.102:3000/fabric', {
+                            source: parseInt(obj.destination),
+                            value: res.data.sellerBalance
+                        })
+                        .then(res => {
+                            console.log("success")    
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                        break;
+
+                    case 3: 
+                        console.log("House 3")
+                        axios.post('http://192.168.1.103:3000/fabric', {
+                            source: parseInt(obj.destination),
+                            value: res.data.sellerBalance
+                        })
+                        .then(res => {
+                            console.log("success")    
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                        break;
+
+                    case 4: 
+                        console.log("House 4")
+                        axios.post('http://192.168.1.104:3000/fabric', {
+                            source: parseInt(obj.destination),
+                            value: res.data.sellerBalance
+                        })
+                        .then(res => {
+                            console.log("success")    
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                        break;
+
+                    case 5: 
+                        console.log("House 5")
+                        axios.post('http://192.168.1.105:3000/fabric', {
+                            source: parseInt(obj.destination),
+                            value: res.data.sellerBalance
+                        })
+                        .then(res => {
+                            console.log("success")    
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                        break;
+
+                    case 6: 
+                        console.log("House 6")
+                        axios.post('http://192.168.1.106:3000/fabric', {
+                            source: parseInt(obj.destination),
+                            value: res.data.sellerBalance
+                        })
+                        .then(res => {
+                            console.log("success")    
                         })
                         .catch(err => {
                             console.log(err)
                         })
                         break;
                     default:
-                        console.log("default switch")
+                        console.log("NO HOUSE " + obj.destination + "!")
 
                 }
             })

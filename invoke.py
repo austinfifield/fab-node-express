@@ -44,102 +44,108 @@ import json
 import sys
 from datetime import datetime
 
-source = sys.argv[1]
-value = sys.argv[2]
-destination = sys.argv[3]
-resObj = {}
+# source = sys.argv[1]
+# value = sys.argv[2]
+# destination = sys.argv[3]
+# resObj = {}
 
+test = {
+    "data": "5"
+}
+
+test = requests.post("http://localhost:3000/socket", json=test)
+print(test.text)
 
 # if source == 0
 # invalid argument
-if source == '0' and value == '0' and destination == '0':
-    print("invalid arguments")
+# if source == '0' and value == '0' and destination == '0':
+#     print("invalid arguments")
 
-elif source == '0':
-    print("invalid arguments")
-
-
-# if destination == 0
-# produce energy
-# update current houses energy to energy + N
-
-#---------------------------------------
-#-----------UNDER CONSTRUCTION----------
-#---------------------------------------
-elif source != '0' and value != '0' and destination == '0':
-    print("Consume Energy House #" + source)
-    resObj = {
-        "owner": "House" + source, # sets the owner of the asset to "House #". This is just for clarity and has no effect on network
-        "ownerType": "Resident",
-        "iden": "iden" + source,
-        "value": value,
-        "idres": "idres" + source,
-        "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:S')
-    }
-    post = requests.post("http://localhost:3000/produce/", json=resObj)
-    print(post.text)
+# elif source == '0':
+#     print("invalid arguments")
 
 
-# if source == destination
-# consume energy
-# update current house energy to energy - N
-#---------------------------------------
-#-----------UNDER CONSTRUCTION----------
-#---------------------------------------
-elif source == destination and value != '0' and source != '0':
-    print("Produce Energy House #" + source)
-    resObj = {
-        "owner": "House" + source, # sets the owner of the asset to "House #". This is just for clarity and has no effect on network
-        "ownerType": "Resident",
-        "iden": "iden" + source,
-        "value": value,
-        "idres": "idres" + source,
-        "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:S')
-    }
-    post = requests.post("http://localhost:3000/consume/", json=resObj)
-    print(post.text)
+# # if destination == 0
+# # produce energy
+# # update current houses energy to energy + N
 
-# if source != destination && destination != 0
-# trade energy
-elif source != destination and destination != '0' and source != '0' and value != '0':
-    print("Energy Trade House #" + source + " and House #" + destination)
-    resObj = {
-        "tokenInc": "idtok" + source,
-        "energyInc": "iden" + destination,
-        "rate": "1",
-        "energyDec" : "iden" + source,
-        "value": value,
-        "tokenDec": "idtok" + destination,
-        "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:S')
-    }
-    post = requests.post("http://localhost:3000/trade/", json=resObj)
-    print(post.text)
-    #if post.text != '-1':
-        #ph1 = requests.post("http://localhost:3000/index", post.text) # my laptop
-        # ph2 = requests.post("http://192.168.1.25:3000/fabric", post.text) # UDOO
-        # ph3 = requests.post("http://192.168.1.8:3000/fabric", post.text) # Atom notebook
-        # ph4 = requests.post("http://192.168.1.110:3000/fabric", post.text) # HP notebook
-        # print(ph1.text)
-        # print(ph2.text)
-        # print(ph3.text)
-        # print(ph4.text)
+# #---------------------------------------
+# #-----------UNDER CONSTRUCTION----------
+# #---------------------------------------
+# elif source != '0' and value != '0' and destination == '0':
+#     print("Consume Energy House #" + source)
+#     resObj = {
+#         "owner": "House" + source, # sets the owner of the asset to "House #". This is just for clarity and has no effect on network
+#         "ownerType": "Resident",
+#         "iden": "iden" + source,
+#         "value": value,
+#         "idres": "idres" + source,
+#         "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:S')
+#     }
+#     post = requests.post("http://localhost:3000/produce/", json=resObj)
+#     print(post.text)
+
+
+# # if source == destination
+# # consume energy
+# # update current house energy to energy - N
+# #---------------------------------------
+# #-----------UNDER CONSTRUCTION----------
+# #---------------------------------------
+# elif source == destination and value != '0' and source != '0':
+#     print("Produce Energy House #" + source)
+#     resObj = {
+#         "owner": "House" + source, # sets the owner of the asset to "House #". This is just for clarity and has no effect on network
+#         "ownerType": "Resident",
+#         "iden": "iden" + source,
+#         "value": value,
+#         "idres": "idres" + source,
+#         "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:S')
+#     }
+#     post = requests.post("http://localhost:3000/consume/", json=resObj)
+#     print(post.text)
+
+# # if source != destination && destination != 0
+# # trade energy
+# elif source != destination and destination != '0' and source != '0' and value != '0':
+#     print("Energy Trade House #" + source + " and House #" + destination)
+#     resObj = {
+#         "tokenInc": "idtok" + source,
+#         "energyInc": "iden" + destination,
+#         "rate": "1",
+#         "energyDec" : "iden" + source,
+#         "value": value,
+#         "tokenDec": "idtok" + destination,
+#         "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:S')
+#     }
+#     post = requests.post("http://localhost:3000/trade/", json=resObj)
+#     print(post.text)
+#     #if post.text != '-1':
+#         #ph1 = requests.post("http://localhost:3000/index", post.text) # my laptop
+#         # ph2 = requests.post("http://192.168.1.25:3000/fabric", post.text) # UDOO
+#         # ph3 = requests.post("http://192.168.1.8:3000/fabric", post.text) # Atom notebook
+#         # ph4 = requests.post("http://192.168.1.110:3000/fabric", post.text) # HP notebook
+#         # print(ph1.text)
+#         # print(ph2.text)
+#         # print(ph3.text)
+#         # print(ph4.text)
 
     
-# Query token house# 0 0
-elif source != '0' and value == '0' and destination == '0':
-    print("Getting account balance for House #" + source)
-    resObj = {
-    "firstName": "admin",
-    "idtok": "idtok" + source,
-    "iden": "iden" + source,
-    "idcash": "idcash" + source,
-    "idres": "idres" + source
-    }
-    get = requests.post("http://localhost:3000/assets/", json=resObj)
-    print(get.text)
+# # Query token house# 0 0
+# elif source != '0' and value == '0' and destination == '0':
+#     print("Getting account balance for House #" + source)
+#     resObj = {
+#     "firstName": "admin",
+#     "idtok": "idtok" + source,
+#     "iden": "iden" + source,
+#     "idcash": "idcash" + source,
+#     "idres": "idres" + source
+#     }
+#     get = requests.post("http://localhost:3000/assets/", json=resObj)
+#     print(get.text)
     
-else:
-    print("Nothing")
+# else:
+#     print("Nothing")
 
 
 

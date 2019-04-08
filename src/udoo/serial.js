@@ -40,6 +40,7 @@ parser.on('data', data =>{
   let source = transactionRequest[0].toString();
   let value = transactionRequest[1].toString();
   let destination = transactionRequest[2].toString();
+  destination = parseInt(destination);
 
   //-------------START LOGIC--------------------------
 
@@ -82,32 +83,64 @@ parser.on('data', data =>{
     }
   }
 
-  // Consume function
-  else {
-    console.log(tynt.Red("Consume function (serial.js)"))
-    resObj = {
-      "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
-      "ownerType": "Resident",
-      "iden": "iden" + source,
-      "value": value,
-      "idres": "idres" + source,
-      "function": "consume",
-      "source": source
-    }    
-    socket.onopen = function() { 
-      socket.send(JSON.stringify(resObj));
-    }
-  }
 
+
+
+    // Trade function
+    else if(source != 0 && value != 0 && parseInt(destination) != parseInt(source)) {
+      console.log(tynt.Red("Trade function (serial.js)"))
+      resObj = {
+        "tokenInc": "idtok" + destination,
+        "energyInc": "iden" + source,
+        "rate": "1",
+        "energyDec" : "iden" + destination,
+        "value": value,
+        "tokenDec": "idtok" + source,
+        "function": "trade",
+        "timestamp": "2019",
+        "source": source,
+        "destination": destination
+    }
+      socket.onopen = function() { 
+        socket.send(JSON.stringify(resObj));
+      }  
+    }
+
+
+
+    // Consume function
+    else{
+      console.log(tynt.Red("Consume function (serial.js)"))
+      resObj = {
+        "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
+        "ownerType": "Resident",
+        "iden": "iden" + source,
+        "value": value,
+        "idres": "idres" + source,
+        "function": "consume",
+        "source": source
+      }    
+      socket.onopen = function() { 
+        socket.send(JSON.stringify(resObj));
+      }
+    }
   // Send transaction request data to the Websocket Server
   socket.onmessage = function(e) {
   console.log('Transaction Result: ' + e.data + '\n');
   port.write(e.data + '\n');
   }
 
-
-
-
   // Trigger event for new data requests received on the serial port
   emitter.emit('newTransactionRequest');
+  
 });
+
+module.exports = {
+  getData: function(data) {
+      console.log("from serial.js: " + data);
+      dataObj = JSON.parse(data);
+
+      console.log(dataObj.source + " " + dataObj.value + " 0")
+      port.write(dataObj.source + " " + dataObj.value + " 0" + '\n');
+  }
+}
