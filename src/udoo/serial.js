@@ -83,7 +83,7 @@ parser.on('data', data =>{
   }
 
   // Consume function
-  else {
+  else if(source != 0 && value != 0 && destination === source){
     console.log(tynt.Red("Consume function (serial.js)"))
     resObj = {
       "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
@@ -99,15 +99,44 @@ parser.on('data', data =>{
     }
   }
 
+  // Trade function
+  else if(source != 0 && value != 0 && destination != source && source != 0) {
+    console.log(tynt.Orange("Consume function (serial.js)"))
+    resObj = {
+      "tokenInc": "idtok" + serialObj.destination,
+      "energyInc": "iden" + serialObj.source,
+      "rate": "1",
+      "energyDec" : "iden" + serialObj.destination,
+      "value": serialObj.value,
+      "tokenDec": "idtok" + serialObj.source,
+      "function": "trade",
+      "timestamp": "2019",
+      "source": serialObj.source,
+      "destination": serialObj.destination
+  }
+    socket.onopen = function() { 
+      socket.send(JSON.stringify(resObj));
+    }  
+  }
+
+  else {
+    console.log(tynt.Red("INVALID CHOICE"));
+  }
+
   // Send transaction request data to the Websocket Server
   socket.onmessage = function(e) {
   console.log('Transaction Result: ' + e.data + '\n');
   port.write(e.data + '\n');
   }
 
-
-
-
   // Trigger event for new data requests received on the serial port
   emitter.emit('newTransactionRequest');
+
+  module.exports = {
+    getData: function(data) {
+        console.log("from serial.js: " + data);
+    }
+  }
+  
 });
+
