@@ -138,6 +138,8 @@ parser.on('data', data =>{
 module.exports = {
   getData: function(data) {
       console.log("from serial.js: " + data);
-      port.write("6 10 0" + '\n');
+      dataObj = JSON.stringify(data);
+      console.log(dataObj.source + " " + dataObj.value + "0")
+      port.write(dataObj.source + " " + dataObj.value + "0" + '\n');
   }
 }
