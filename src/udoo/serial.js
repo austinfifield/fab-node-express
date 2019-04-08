@@ -83,6 +83,24 @@ parser.on('data', data =>{
     }
   }
 
+    // Consume function
+    else if(source != 0 && value != 0 && source == destination + "\r"){
+      console.log(tynt.Red("Consume function (serial.js)"))
+      resObj = {
+        "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
+        "ownerType": "Resident",
+        "iden": "iden" + source,
+        "value": value,
+        "idres": "idres" + source,
+        "function": "consume",
+        "source": source
+      }    
+      socket.onopen = function() { 
+        socket.send(JSON.stringify(resObj));
+      }
+    }
+
+
     // Trade function
     else if(source != 0 && value != 0 && destination != source) {
       console.log(tynt.Red("Trade function (serial.js)"))
@@ -103,22 +121,7 @@ parser.on('data', data =>{
       }  
     }
 
-  // Consume function
-  else if(source != 0 && value != 0){
-    console.log(tynt.Red("Consume function (serial.js)"))
-    resObj = {
-      "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
-      "ownerType": "Resident",
-      "iden": "iden" + source,
-      "value": value,
-      "idres": "idres" + source,
-      "function": "consume",
-      "source": source
-    }    
-    socket.onopen = function() { 
-      socket.send(JSON.stringify(resObj));
-    }
-  }
+
 
   else {
     console.log(tynt.Red("INVALID CHOICE"));
