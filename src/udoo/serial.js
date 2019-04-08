@@ -83,7 +83,7 @@ parser.on('data', data =>{
   }
 
     // Trade function
-    else if(source != 0 && value != 0 && destination != source && source != 0) {
+    else if(source != 0 && value != 0 && destination != source) {
       console.log(tynt.Red("Trade function (serial.js)"))
       resObj = {
         "tokenInc": "idtok" + destination,
