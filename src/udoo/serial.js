@@ -40,6 +40,7 @@ parser.on('data', data =>{
   let source = transactionRequest[0].toString();
   let value = transactionRequest[1].toString();
   let destination = transactionRequest[2].toString();
+  destination = parseInt(destination);
   console.log(destination);
 
   //-------------START LOGIC--------------------------
@@ -102,7 +103,7 @@ parser.on('data', data =>{
 
 
     // Trade function
-    else if(source != 0 && value != 0 && destination != source) {
+    else if(source != 0 && value != 0 && destination != parseInt(source)) {
       console.log(tynt.Red("Trade function (serial.js)"))
       resObj = {
         "tokenInc": "idtok" + destination,
