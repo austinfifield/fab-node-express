@@ -26,7 +26,7 @@ else if(serialObj.source != '0' && serialObj.value == '0' && serialObj.destinati
         "function": "query"
     }
     socket.onopen = function() {
-        socket.send(JSON.stringify(resObj));
+        socket.send(JSON.stringify(serialObj.source + " " + resObj + "0"));
     };
 }
 
