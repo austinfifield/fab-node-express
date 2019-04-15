@@ -57,7 +57,8 @@ parser.on('data', data =>{
       "iden": "iden" + source,
       "idcash": "idcash" + source,
       "idres": "idres" + source,
-      "function": "query"
+      "function": "query",
+      "source": source
     }
     
     socket.onopen = function() { 

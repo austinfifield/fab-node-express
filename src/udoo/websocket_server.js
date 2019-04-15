@@ -44,7 +44,7 @@ wss.on('connection', function connection(ws, req) {
 
             }).then(res => {
                 JSON.stringify(obj);
-                ws.send(JSON.stringify(obj.id + " " + res.data + " 0"))
+                ws.send(JSON.stringify(obj.source + " " + res.data + " 0"))
             })
             .catch(err => {
                 console.log(err)
