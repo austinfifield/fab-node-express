@@ -23,10 +23,11 @@ else if(serialObj.source != '0' && serialObj.value == '0' && serialObj.destinati
         "iden": "iden" + serialObj.source,
         "idcash": "idcash" + serialObj.source,
         "idres": "idres" + serialObj.source,
-        "function": "query"
+        "function": "query",
+        "id": serialObj.source
     }
     socket.onopen = function() {
-        socket.send(JSON.stringify(serialObj.source + " " + resObj + "0"));
+        socket.send(JSON.stringify(resObj));
     };
 }
 

@@ -34,6 +34,7 @@ wss.on('connection', function connection(ws, req) {
 
         obj = JSON.parse(message)
         console.log(message)
+
         // QUERY
         if(obj.function == "query"){
             console.log(tynt.Green("console log: QUERY FUNCTION (from websocket_server.js"))
@@ -42,7 +43,7 @@ wss.on('connection', function connection(ws, req) {
                 idres: obj.idres
 
             }).then(res => {
-                ws.send(JSON.stringify(res.data))
+                ws.send(JSON.stringify(obj.id + " " + res.data + "0"))
             })
             .catch(err => {
                 console.log(err)
