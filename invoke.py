@@ -44,17 +44,11 @@ import json
 import sys
 from datetime import datetime
 
-# source = sys.argv[1]
-# value = sys.argv[2]
-# destination = sys.argv[3]
-# resObj = {}
+source = sys.argv[1]
+value = sys.argv[2]
+destination = sys.argv[3]
+resObj = {}
 
-test = {
-    "data": "5"
-}
-
-test = requests.post("http://localhost:3000/socket", json=test)
-print(test.text)
 
 # if source == 0
 # invalid argument
@@ -132,17 +126,17 @@ print(test.text)
 
     
 # # Query token house# 0 0
-# elif source != '0' and value == '0' and destination == '0':
-#     print("Getting account balance for House #" + source)
-#     resObj = {
-#     "firstName": "admin",
-#     "idtok": "idtok" + source,
-#     "iden": "iden" + source,
-#     "idcash": "idcash" + source,
-#     "idres": "idres" + source
-#     }
-#     get = requests.post("http://localhost:3000/assets/", json=resObj)
-#     print(get.text)
+if source != '0' and value == '0' and destination == '0':
+    print("Getting account balance for House #" + source)
+    resObj = {
+    "firstName": "admin",
+    "idtok": "idtok" + source,
+    "iden": "iden" + source,
+    "idcash": "idcash" + source,
+    "idres": "idres" + source
+    }
+    get = requests.post("http://localhost:3000/assets/", json=resObj)
+    print(get.text)
     
 # else:
 #     print("Nothing")
