@@ -113,7 +113,7 @@ function invokeChaincode(fcn, args, ccId, ccVer, client, channelName ){
 
     //TODO create function to initialize channel with context
 
-    return channel.sendTransactionProposal(request)
+    return channel.sendTransactionProposal(request, 90000)
         .then((results) =>{
             //check results of proposals
             //event should check at this point
