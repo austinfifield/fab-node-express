@@ -27,6 +27,8 @@ parser.on('data', data =>{
     let destination = parseInt(transactionRequest[2]);
  
     if(source != 0 && value == 0 && destination == 0) {
+        console.log(tynt.Yellow("Query"));
+
         axios.post('http://localhost:3000/assets', {
             iden: "iden" + source,
             idres: "idres" + source
@@ -34,16 +36,32 @@ parser.on('data', data =>{
         }).then(res => {
             console.log('Transaction Result: ' + source + " " + res.data + ' 0\n');
             port.write(source + " " + res.data + " " + 0 + '\n');
-            
-            
         })
         .catch(err => {
             console.log(err)
         })
     }
 
-//   console.log('Transaction Result: ' + e.data + '\n');
-//   port.write(e.data + '\n');
+    else if(source != 0 && value > 0 && destination == 0) {
+        console.log(tynt.Green("Produce"));
+
+        axios.post('http://localhost:3000/produce', {
+            owner: "House" + source,
+            ownerType: "Resident",
+            iden: "iden" + source,
+            value: value,
+            idres: "idres" + source
+
+        }).then(res => {
+            console.log('Transaction Result: ' + source + " " + res.data + ' 0\n');
+            port.write(source + " " + res.data + " " + 0 + '\n');
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+
   
 
   // Trigger event for new data requests received on the serial port
