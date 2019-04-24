@@ -105,7 +105,7 @@ else if(source != 0 && value > 0 && destination != source && destination != 0) {
 
             case 2: // House 2
                 console.log("House 2")
-                axios.post('http://192.168.1.102:3000/fabric', {
+                axios.post('http://192.168.1.25:3000/fabric', {
                     source: destination,
                     value: res.data.sellerBalance
                 })
