@@ -32,8 +32,8 @@ parser.on('data', data =>{
             idres: "idres" + source
 
         }).then(res => {
-            console.log(res.data);
-            
+            console.log('Transaction Result: ' + e.data + '\n');
+            port.write(e.data + '\n');
             
             
         })
