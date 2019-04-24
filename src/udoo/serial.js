@@ -74,15 +74,16 @@ parser.on('data', data =>{
             value: value,
             idres: "idres" + source
 
-    }).then(res => {
-        // send amount consumed
-        port.write(source + " " + parseInt(res.data.consumed) + " " + source + '\n');
-        // send new balance
-        port.write(source + " " + parseInt(res.data.newBalance) + " " + 0 + '\n');
+        }).then(res => {
+            // send amount consumed
+            port.write(source + " " + parseInt(res.data.consumed) + " " + source + '\n');
+            // send new balance
+            port.write(source + " " + parseInt(res.data.newBalance) + " " + 0 + '\n');
 
-    }).catch(err => {
-        console.log(err);
-    })
+        }).catch(err => {
+            console.log(err);
+        })
+    }
   
 
   // Trigger event for new data requests received on the serial port
