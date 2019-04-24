@@ -6,6 +6,7 @@ const port = new SerialPort('/dev/ttyACM0', { baudRate: 9600 });
 const parser = port.pipe(new Readline({ delimiter: '\n' }));
 const emitter = new EventEmitter();
 const axios = require('axios');
+const moment = require('moment')
 
 
 port.on("open", () => {
@@ -84,8 +85,125 @@ parser.on('data', data =>{
             console.log(err);
         })
     }
-  
 
+
+                // TRADE
+                else if(source != 0 && value > 0 && destination != source && destination != 0) {
+                    var now = moment()
+                    var formatted = now.format('YYYY-MM-DD HH:mm:ss Z')
+                    console.log(formatted)
+                    console.log(tynt.Purple("console log: TRADE FUNCTION (from websocket_server.js)"))
+                    axios.post('http://localhost:3000/trade', {
+                        
+                        "tokenInc": "idtok" + destination,
+                        "energyInc": "iden" + source,
+                        "rate": "1",
+                        "energyDec" : "iden" + destination,
+                        "value": value,
+                        "tokenDec": "idtok" + source,
+                        "timestamp": formatted
+                        
+                    }).then(res => {
+                        // send amount consumed
+                        port.write(source + " " + parseInt(res.data.amountSold) + " " + destination + '\n')
+        
+                        // send new balance
+                        port.write(destination + " " + parseInt(res.data.sellerBalance) + " " + 0 + '\n')
+
+                        switch(destination) {
+                            case 1: // House 1
+                                console.log("House 1")
+                                axios.post('http://192.168.1.235:3000/fabric', {
+                                    source: destination,
+                                    value: res.data.sellerBalance
+                                })
+                                .then(res => {
+                                    console.log("success")    
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                })
+                                break;
+        
+                            case 2: // House 2
+                                console.log("House 2")
+                                axios.post('http://192.168.1.102:3000/fabric', {
+                                    source: destination,
+                                    value: res.data.sellerBalance
+                                })
+                                .then(res => {
+                                    console.log("success")    
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                })
+                                break;
+        
+                            case 3: 
+                                console.log("House 3")
+                                axios.post('http://192.168.1.103:3000/fabric', {
+                                    source: destination,
+                                    value: res.data.sellerBalance
+                                })
+                                .then(res => {
+                                    console.log("success")    
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                })
+                                break;
+        
+                            case 4: 
+                                console.log("House 4")
+                                axios.post('http://192.168.1.104:3000/fabric', {
+                                    source: destination,
+                                    value: res.data.sellerBalance
+                                })
+                                .then(res => {
+                                    console.log("success")    
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                })
+                                break;
+        
+                            case 5: 
+                                console.log("House 5")
+                                axios.post('http://192.168.1.105:3000/fabric', {
+                                    source: destination,
+                                    value: res.data.sellerBalance
+                                })
+                                .then(res => {
+                                    console.log("success")    
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                })
+                                break;
+        
+                            case 6: 
+                                console.log("House 6")
+                                axios.post('http://192.168.1.106:3000/fabric', {
+                                    source: destination,
+                                    value: res.data.sellerBalance
+                                })
+                                .then(res => {
+                                    console.log("success")    
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                })
+                                break;
+                            default:
+                                console.log("NO HOUSE " + destination + "!") 
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+                }
+                    
+            
   // Trigger event for new data requests received on the serial port
   emitter.emit('newTransactionRequest');
   
