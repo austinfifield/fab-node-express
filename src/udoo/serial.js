@@ -211,10 +211,10 @@ parser.on('data', data =>{
 
 module.exports = {
   getData: function(data) {
-      console.log("from serial.js: " + data);
-    //   dataObj = JSON.parse(data);
+    console.log("from serial.js: " + data);
+    dataObj = JSON.parse(data);
 
-    //   console.log(dataObj.source + " " + dataObj.value + " 0")
+    console.log(dataObj.source + " " + dataObj.value + " 0")
     //   port.write(dataObj.source + " " + dataObj.value + " 0" + '\n');
   }
 }
