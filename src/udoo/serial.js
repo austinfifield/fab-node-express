@@ -19,23 +19,30 @@ emitter.on('newTransactionRequest', function(){
 parser.on('data', data =>{
     console.log(tynt.Blue('Data received on serial port: ' + data));
     let transactionRequest = data.split(' ');
-    console.log(typeof(transactionRequest[0]));
-    console.log(typeof(transactionRequest[1]));
-    console.log(typeof(transactionRequest[2]));
 
     let source = parseInt(transactionRequest[0]);
     let value = parseInt(transactionRequest[1]);
     let destination = parseInt(transactionRequest[2]);
-
-    console.log(typeof(source));
-    console.log(typeof(value));
-    console.log(typeof(destination));
  
-  // Send transaction request data to the Websocket Server
-  socket.onmessage = function(e) {
-  console.log('Transaction Result: ' + e.data + '\n');
-  port.write(e.data + '\n');
-  }
+    if(source != 0 && value == 0 && destination == 0) {
+        axios.post('http://localhost:3000/assets', {
+            iden: "iden" + source,
+            idres: "idres" + source
+
+        }).then(res => {
+            console.log(res.data);
+            
+            
+            
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+//   console.log('Transaction Result: ' + e.data + '\n');
+//   port.write(e.data + '\n');
+  
 
   // Trigger event for new data requests received on the serial port
   emitter.emit('newTransactionRequest');
