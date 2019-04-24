@@ -12,7 +12,8 @@ let tradeRouter = require('./routes/trade');
 let produceRouter = require('./routes/produce');
 let consumeRouter = require('./routes/consume');
 let assetsRouter = require('./routes/assets');
-
+let createUserRouter = require('./routes/createUser');
+let createAssetRouter = require('./routes/createAsset');
 
 var app = express();
 
@@ -33,7 +34,8 @@ app.use('/trade', tradeRouter);
 app.use('/produce', produceRouter);
 app.use('/consume', consumeRouter);
 app.use('/assets', assetsRouter);
-
+app.use('/createUser', createUserRouter);
+app.use('/CreateAsset', createAssetRouter);
 
 
 // catch 404 and forward to error handler

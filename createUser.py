@@ -39,7 +39,7 @@ source = sys.argv[1]
 resObj = {
     "firstName": "Duke", # Defaults user name to Duke Energy
     "lastName": "Energy",
-    "alias": "House " + source, # Sets alias to "House #"
+    "alias": "House" + source, # Sets alias to "House #"
     "tokens": "idtok" + source,
     "id": "idres" + source,
     "type": "Prosumer",
@@ -47,6 +47,6 @@ resObj = {
     "energy": "iden" + source
 }
 
-post = requests.post("http://localhost:3000/user/", json=resObj) # sets the object to send and the endpoint
+post = requests.post("http://localhost:3000/createUser/", json=resObj) # sets the object to send and the endpoint
 
 print(post.text) # for debugging

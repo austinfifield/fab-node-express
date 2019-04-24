@@ -59,5 +59,5 @@ resObj = {
     "idres": "idres" + source
 }
 
-post = requests.post("http://localhost:3000/assets/", json=resObj) # endpoint
+post = requests.post("http://localhost:3000/createAsset/", json=resObj) # endpoint
 print(post.text)
