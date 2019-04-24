@@ -16,7 +16,6 @@ if(source != 0 && value == 0 && destination == 0) {
 
     }).then(res => {
         console.log('Transaction Result: ' + source + " " + res.data + ' 0\n');
-        port.write(source + " " + res.data + " " + 0 + '\n');
     })
     .catch(err => {
         console.log(err)
@@ -36,7 +35,7 @@ else if(source != 0 && value > 0 && destination == 0) {
 
     }).then(res => {
         console.log('Transaction Result: ' + source + " " + res.data + ' 0\n');
-        port.write(source + " " + res.data + " " + 0 + '\n');
+        
     })
     .catch(err => {
         console.log(err)
@@ -56,9 +55,9 @@ else if(source != 0 && value > 0 && source == destination) {
 
     }).then(res => {
         // send amount consumed
-        port.write(source + " " + parseInt(res.data.consumed) + " " + source + '\n');
+        console.log(source + " " + parseInt(res.data.consumed) + " " + source + '\n');
         // send new balance
-        port.write(source + " " + parseInt(res.data.newBalance) + " " + 0 + '\n');
+        console.log(source + " " + parseInt(res.data.newBalance) + " " + 0 + '\n');
 
     }).catch(err => {
         console.log(err);
@@ -84,10 +83,10 @@ else if(source != 0 && value > 0 && destination != source && destination != 0) {
         
     }).then(res => {
         // send amount consumed
-        port.write(source + " " + parseInt(res.data.amountSold) + " " + destination + '\n')
+        console.log(source + " " + parseInt(res.data.amountSold) + " " + destination + '\n')
 
         // send new balance
-        port.write(destination + " " + parseInt(res.data.sellerBalance) + " " + 0 + '\n')
+        console.log(destination + " " + parseInt(res.data.sellerBalance) + " " + 0 + '\n')
 
         switch(destination) {
             case 1: // House 1
