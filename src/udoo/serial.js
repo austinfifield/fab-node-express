@@ -26,6 +26,7 @@ parser.on('data', data =>{
     let value = parseInt(transactionRequest[1]);
     let destination = parseInt(transactionRequest[2]);
  
+    // Query
     if(source != 0 && value == 0 && destination == 0) {
         console.log(tynt.Yellow("Query"));
 
@@ -42,6 +43,7 @@ parser.on('data', data =>{
         })
     }
 
+    // Produce
     else if(source != 0 && value > 0 && destination == 0) {
         console.log(tynt.Green("Produce"));
 
@@ -61,7 +63,26 @@ parser.on('data', data =>{
         })
     }
 
+    // Consume
+    else if(source != 0 && value > 0 && source == destination) {
+        console.log(tynt.Red("Consume"));
 
+        axios.post('http://localhost:3000/consume', {
+            owner: "House" + source,
+            ownerType: "Resident",
+            iden: "iden" + source,
+            value: value,
+            idres: "idres" + source
+
+    }).then(res => {
+        // send amount consumed
+        port.write(source + " " + parseInt(res.data.consumed) + " " + source + '\n');
+        // send new balance
+        port.write(source + " " + parseInt(res.data.newBalance) + " " + 0 + '\n');
+
+    }).catch(err => {
+        console.log(err);
+    })
   
 
   // Trigger event for new data requests received on the serial port
