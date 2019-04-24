@@ -22,96 +22,15 @@ parser.on('data', data =>{
     console.log(typeof(transactionRequest[0]));
     console.log(typeof(transactionRequest[1]));
     console.log(typeof(transactionRequest[2]));
-    // let source = transactionRequest[0].toString();
-    // let value = transactionRequest[1].toString();
-    // let destination = transactionRequest[2].toString();
-    // destination = parseInt(destination);
 
-  //-------------START LOGIC--------------------------
+    let source = parseInt(transactionRequest[0]);
+    let value = parseInt(transactionRequest[1]);
+    let destination = parseInt(transactionRequest[2]);
 
-  if(source == 0) {
-    console.log(tynt.Blue("invalid request, no house 0"));
-  }
-
-  // Query asset balances
-  else if(source != 0 && value == 0 && destination == 0) {
-    console.log(tynt.Yellow("Query function (serial.js)"))
-    resObj = {
-      "firstName": "admin",
-      "idtok": "idtok" + source,
-      "iden": "iden" + source,
-      "idcash": "idcash" + source,
-      "idres": "idres" + source,
-      "function": "query",
-      "source": source
-    }
-    
-    socket.onopen = function() {
-      socket.send(JSON.stringify(resObj));
-
-    }
-
-  }
-
-  // Produce function
-  else if(source != 0 && value != 0 && destination == 0) {
-    console.log(tynt.Green("Produce function (serial.js)"))
-    resObj = {
-      "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
-      "ownerType": "Resident",
-      "iden": "iden" + source,
-      "value": value,
-      "idres": "idres" + source,
-      "function": "produce",
-      "source": source
-    }    
-    socket.onopen = function() { 
-      socket.send(JSON.stringify(resObj));
-
-    }
-  }
-
-
-
-
-    // Trade function
-    else if(source != 0 && value != 0 && parseInt(destination) != parseInt(source)) {
-      console.log(tynt.Red("Trade function (serial.js)"))
-      resObj = {
-        "tokenInc": "idtok" + destination,
-        "energyInc": "iden" + source,
-        "rate": "1",
-        "energyDec" : "iden" + destination,
-        "value": value,
-        "tokenDec": "idtok" + source,
-        "function": "trade",
-        "timestamp": "2019",
-        "source": source,
-        "destination": destination
-    }
-      socket.onopen = function() { 
-        socket.send(JSON.stringify(resObj));
-      }  
-    }
-
-
-
-    // Consume function
-    else{
-      console.log(tynt.Red("Consume function (serial.js)"))
-      resObj = {
-        "owner": "House" + source, // sets the owner of the asset to "House #". This is just for clarity and has no effect on network
-        "ownerType": "Resident",
-        "iden": "iden" + source,
-        "value": value,
-        "idres": "idres" + source,
-        "function": "consume",
-        "source": source
-      }    
-      socket.onopen = function() { 
-        socket.send(JSON.stringify(resObj));
-      }
-    }
+    console.log(typeof(source));
+    console.log(typeof(value));
+    console.log(typeof(destination));
+ 
   // Send transaction request data to the Websocket Server
   socket.onmessage = function(e) {
   console.log('Transaction Result: ' + e.data + '\n');
@@ -126,9 +45,9 @@ parser.on('data', data =>{
 module.exports = {
   getData: function(data) {
       console.log("from serial.js: " + data);
-      dataObj = JSON.parse(data);
+    //   dataObj = JSON.parse(data);
 
-      console.log(dataObj.source + " " + dataObj.value + " 0")
-      port.write(dataObj.source + " " + dataObj.value + " 0" + '\n');
+    //   console.log(dataObj.source + " " + dataObj.value + " 0")
+    //   port.write(dataObj.source + " " + dataObj.value + " 0" + '\n');
   }
 }
