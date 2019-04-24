@@ -70,7 +70,7 @@ else if(source != 0 && value > 0 && destination != source && destination != 0) {
     var now = moment()
     var formatted = now.format('YYYY-MM-DD HH:mm:ss Z')
     console.log(formatted)
-    console.log(tynt.Purple("console log: TRADE FUNCTION (from websocket_server.js)"))
+    console.log(tynt.Blue("console log: TRADE FUNCTION (from websocket_server.js)"))
     axios.post('http://localhost:3000/trade', {
         
         "tokenInc": "idtok" + destination,
