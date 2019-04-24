@@ -33,7 +33,7 @@ parser.on('data', data =>{
 
         }).then(res => {
             console.log('Transaction Result: ' + source + " " + res.data + ' 0\n');
-            //port.write(res.data + '\n');
+            port.write(res.data + '\n');
             
             
         })
