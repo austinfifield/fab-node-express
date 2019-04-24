@@ -95,20 +95,20 @@ parser.on('data', data =>{
         console.log(tynt.Blue("console log: TRADE FUNCTION (from websocket_server.js)"))
         axios.post('http://localhost:3000/trade', {
             
-            "tokenInc": "idtok" + destination,
-            "energyInc": "iden" + source,
-            "rate": "1",
-            "energyDec" : "iden" + destination,
-            "value": value,
-            "tokenDec": "idtok" + source,
-            "timestamp": formatted
+            tokenInc: "idtok" + destination,
+            energyInc: "iden" + source,
+            rate: "1",
+            energyDec : "iden" + destination,
+            value: value,
+            tokenDec: "idtok" + source,
+            timestamp: "today"
             
         }).then(res => {
             // send amount consumed
-            port.write(source + " " + parseInt(res.data.amountSold) + " " + destination + '\n')
+            port.write(source + " " + res.data.amountSold + " " + destination + '\n')
 
             // send new balance
-            port.write(destination + " " + parseInt(res.data.sellerBalance) + " " + 0 + '\n')
+            port.write(destination + " " + res.data.sellerBalance + " " + 0 + '\n')
 
             switch(destination) {
                 case 1: // House 1

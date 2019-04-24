@@ -73,13 +73,13 @@ else if(source != 0 && value > 0 && destination != source && destination != 0) {
     console.log(tynt.Blue("console log: TRADE FUNCTION (from websocket_server.js)"))
     axios.post('http://localhost:3000/trade', {
         
-        "tokenInc": "idtok" + destination,
-        "energyInc": "iden" + source,
-        "rate": "1",
-        "energyDec" : "iden" + destination,
-        "value": value,
-        "tokenDec": "idtok" + source,
-        "timestamp": formatted
+        tokenInc: "idtok" + destination,
+        energyInc: "iden" + source,
+        rate: "1",
+        energyDec : "iden" + destination,
+        value: value,
+        tokenDec: "idtok" + source,
+        timestamp: "today"
         
     }).then(res => {
         // send amount consumed
