@@ -113,7 +113,7 @@ parser.on('data', data =>{
             switch(destination) {
                 case 1: // House 1
                     console.log("House 1")
-                    axios.post('http://192.168.1.235:3000/fabric', {
+                    axios.post('http://192.168.1.101:3000/fabric', {
                         source: destination,
                         value: res.data.sellerBalance
                     })
@@ -127,7 +127,7 @@ parser.on('data', data =>{
 
                 case 2: // House 2
                     console.log("House 2")
-                    axios.post('http://192.168.1.25:3000/fabric', {
+                    axios.post('http://192.168.1.102:3000/fabric', {
                         source: destination,
                         value: res.data.sellerBalance
                     })

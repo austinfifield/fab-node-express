@@ -77,7 +77,7 @@ else if(source != 0 && value > 0 && destination != source && destination != 0) {
         energyInc: "iden" + source,
         rate: "1",
         energyDec : "iden" + destination,
-        value: value,
+        value: value.toString(),
         tokenDec: "idtok" + source,
         timestamp: "today"
         

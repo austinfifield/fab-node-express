@@ -26,8 +26,8 @@ router.post("/", (req, res) => {
 
     // Recieve transaction data
     let resident = req.body
-    let args = [JSON.stringify(resident)]
-
+    console.log(resident);
+    let args = JSON.stringify(resident);
     // Variables
     let amountSold = 0;
     let sellerBalance = 0;
@@ -55,12 +55,14 @@ router.post("/", (req, res) => {
     }).then(() => {
         console.log("amountSold = " + amountSold)
         if(amountSold != 0 || amountSold != '0') {
-            console.log("amountSold != 0, invoked")
-            fabService.invoke("admin", constants.trade, args)
+            console.log("Invoking CC...")
+            fabService.invoke("admin", constants.trade, [args])
+            console.log("Invoking CC complete")
             sellerBalanceInt = sellerBalanceInt - amountSold;
-            console.log("Sellerbalance = " + sellerBalanceInt)
         }
     }).then(() => {
+
+        console.log("Sellerbalance = " + sellerBalanceInt)
         transObj = {
             amountSold: parseInt(amountSold),
             sellerBalance: parseInt(sellerBalanceInt)
