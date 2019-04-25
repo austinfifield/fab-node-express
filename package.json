@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "test": "ENVIRONMENT=local mocha --timeout 10000 ./tests/integration/*.js",
     "dev": "nodemon node ./bin/www",
-    "debug": "GRPC_TRACE=all GRPC_VERBOSITY=DEBUG node ./src/udoo/serial.js",
+    "debug": "GRPC_TRACE=all GRPC_VERBOSITY=DEBUG node ./bin/www",
     "all": "concurrently \"nodemon node ./src/udoo/websocket_server.js\" \"nodemon node ./src/udoo/socket_testing.js\"",
     "kill": "fuser -n tcp -k 3000"
   },
