@@ -93,7 +93,7 @@ parser.on('data', data =>{
             energyInc: "iden" + source,
             rate: "1",
             energyDec : "iden" + destination,
-            value: value,
+            value: value.toString(),
             tokenDec: "idtok" + source,
             timestamp: formatted
             
