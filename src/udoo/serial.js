@@ -1,8 +1,10 @@
 const SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline');
+const EventEmitter = require('events');
 const tynt = require('tynt')
 const port = new SerialPort('/dev/ttyACM0', { baudRate: 9600 });
 const parser = port.pipe(new Readline({ delimiter: '\n' }));
+const emitter = new EventEmitter();
 const axios = require('axios');
 const moment = require('moment')
 
@@ -11,6 +13,10 @@ port.on("open", () => {
     console.log(tynt.Blue('Serial port /dev/ttyACM0 is open\n'));
   });
   
+// Display "New Transaction Request" when new serial data is received
+emitter.on('newTransactionRequest', function(){
+  console.log(tynt.Blue('New Transaction Request\n'));
+});
 
 // Read the serial data on the port
 parser.on('data', data =>{
@@ -86,7 +92,7 @@ parser.on('data', data =>{
         var now = moment()
         var formatted = now.format('YYYY-MM-DD HH:mm:ss Z')
         console.log(formatted)
-        console.log(tynt.Blue("Trade"))
+        console.log(tynt.Blue("console log: TRADE FUNCTION (from websocket_server.js)"))
         axios.post('http://localhost:3000/trade', {
             
             tokenInc: "idtok" + destination,
@@ -196,10 +202,16 @@ parser.on('data', data =>{
             console.log(err)
         })
     }
+                    
+            
+  // Trigger event for new data requests received on the serial port
+  emitter.emit('newTransactionRequest');
+  
 });
 
 module.exports = {
   getData: function(data) {
+    console.log("from serial.js: " + data);
     dataObj = JSON.parse(data);
 
     console.log(dataObj.source + " " + dataObj.value + " 0")
