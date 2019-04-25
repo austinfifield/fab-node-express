@@ -41,28 +41,20 @@ router.post("/", (req, res) => {
         payloadObj = JSON.parse(payload)
 
         sellerBalanceInt = parseInt(payloadObj.value);
-        console.log("Seller Balance = " + sellerBalanceInt)
         valueInt = parseInt(resident.value);
-        console.log("Value sold = " + valueInt)
         amountSold = valueInt;
-        console.log("amountSold = " + amountSold)
         // Do the evaluation
         if(sellerBalanceInt < valueInt) {
             
             amountSold = sellerBalance;
-            console.log("sellerBalance < value, " + amountSold)
         }
     }).then(() => {
-        console.log("amountSold = " + amountSold)
         if(amountSold != 0 || amountSold != '0') {
-            console.log("Invoking CC...")
             fabService.invoke("admin", constants.trade, [args])
-            console.log("Invoking CC complete")
             sellerBalanceInt = sellerBalanceInt - amountSold;
         }
     }).then(() => {
 
-        console.log("Sellerbalance = " + sellerBalanceInt)
         transObj = {
             amountSold: parseInt(amountSold),
             sellerBalance: parseInt(sellerBalanceInt)
