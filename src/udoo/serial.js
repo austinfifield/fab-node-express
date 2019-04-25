@@ -11,10 +11,6 @@ port.on("open", () => {
     console.log(tynt.Blue('Serial port /dev/ttyACM0 is open\n'));
   });
   
-// Display "New Transaction Request" when new serial data is received
-emitter.on('newTransactionRequest', function(){
-  console.log(tynt.Blue('New Transaction Request\n'));
-});
 
 // Read the serial data on the port
 parser.on('data', data =>{
