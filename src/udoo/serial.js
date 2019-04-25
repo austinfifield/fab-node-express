@@ -101,7 +101,7 @@ parser.on('data', data =>{
             energyDec : "iden" + destination,
             value: value,
             tokenDec: "idtok" + source,
-            timestamp: "today"
+            timestamp: formatted
             
         }).then(res => {
             // send amount consumed

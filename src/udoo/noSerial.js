@@ -79,7 +79,7 @@ else if(source != 0 && value > 0 && destination != source && destination != 0) {
         energyDec : "iden" + destination,
         value: value.toString(),
         tokenDec: "idtok" + source,
-        timestamp: "today"
+        timestamp: formatted
         
     }).then(res => {
         // send amount consumed
