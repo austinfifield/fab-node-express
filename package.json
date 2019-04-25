@@ -32,6 +32,7 @@
     "http-errors": "~1.6.2",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
+    "pm2": "^3.5.0",
     "pug": "2.0.0-beta11",
     "serialport": "^7.1.4",
     "shelljs": "^0.8.3",
