@@ -71,8 +71,10 @@ parser.on('data', data =>{
 
         }).then(res => {
             // send amount consumed
+            console.log('Transaction Result: ' + source + " " + parseInt(res.data.consumed) + " " + source + '\n');
             port.write(source + " " + parseInt(res.data.consumed) + " " + source + '\n');
             // send new balance
+            console.log('Transaction Result: ' + source + " " + parseInt(res.data.newBalance) + " " + 0 + '\n');
             port.write(source + " " + parseInt(res.data.newBalance) + " " + 0 + '\n');
 
         }).catch(err => {
@@ -99,9 +101,11 @@ parser.on('data', data =>{
             
         }).then(res => {
             // send amount consumed
+            console.log('Transaction Result: ' + source + " " + res.data.amountSold + " " + destination + '\n');
             port.write(source + " " + res.data.amountSold + " " + destination + '\n')
 
             // send new balance
+            console.log('Transaction Result: ' + destination + " " + res.data.sellerBalance + " " + 0 + '\n');
             port.write(destination + " " + res.data.sellerBalance + " " + 0 + '\n')
 
             switch(destination) {
