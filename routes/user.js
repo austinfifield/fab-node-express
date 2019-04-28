@@ -1,3 +1,8 @@
+/*
+user.js - Might be a redundant file, will probably remove.
+*/
+
+
 let express = require('express');
 let router = express.Router();
 const constants = require('../src/constants');

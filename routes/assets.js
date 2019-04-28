@@ -1,12 +1,14 @@
+/*
+assets.js - This endpoint will recieve POST requests to QUERY a residents asset. This is used in the QUERY function in serial.js/noSerial.js
+*/
+
 let express = require('express');
 let router = express.Router();
 const constants = require('../src/constants');
 let appRoot = require('app-root-path');
 let fabService = require(`${appRoot}/src/fabric/fabric-interface`);
 
-
-let resObj = {}
-
+// POST request
 router.post("/", (req, res) => {
     let resident = req.body
     
@@ -22,7 +24,7 @@ router.post("/", (req, res) => {
     })
 });
 
-
+// GET request, currently useless
 router.get("/", (req, res) => {
     res.send("Get request does nothing");
 });

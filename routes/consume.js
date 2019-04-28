@@ -1,3 +1,7 @@
+/*
+consume.js - This endpoint recieves a POST request to consume energy. This is used in the CONSUME function from serial.js
+*/
+
 let express = require('express');
 let router = express.Router();
 const constants = require('../src/constants');
@@ -7,10 +11,12 @@ let fabService = require(`${appRoot}/src/fabric/fabric-interface`);
 
 let resObj = {}
 
+// GET request, currently useless
 router.get("/", (req, res) => {
     res.send("Under construction...")
 });
 
+// POST request
 router.post("/", (req, res) => {
     let resident = req.body;
 

@@ -1,11 +1,15 @@
+/*
+trade.js - This is the trade route/endpoint that handles all of the trade requests to the blockchain.
+It recieves data via POST request from serial.js and then sends the transaction results as a response.
+*/
+
 let express = require('express');
 let router = express.Router();
 const constants = require('../src/constants');
 let appRoot = require('app-root-path');
 let fabService = require(`${appRoot}/src/fabric/fabric-interface`);
 
-// Get all transactions from a specific resident
-
+// Get all transactions from a specific resident (NOT CURRENTLY USED FOR ANYTHING)
 router.get("/", (req, res) => {
     let resident = req.body
     fabService.query("admin", constants.getTransactions, [resident.idres])
@@ -18,10 +22,7 @@ router.get("/", (req, res) => {
 });
 
 
-// Invoke a transaction:
-// Either between two different residents (Houses) or,
-// Consume ones own energy or,
-// Produce energy
+// POST request
 router.post("/", (req, res) => {
 
     // Recieve transaction data
@@ -37,29 +38,38 @@ router.post("/", (req, res) => {
     // The person selling energy with be the energy decreasing ID
     fabService.query("admin", constants.getEnergy, [resident.energyDec])
     .then(payload => {
-        
+        // The response from the blockchain query
         payloadObj = JSON.parse(payload)
 
+        // extracts the account balance
         sellerBalanceInt = parseInt(payloadObj.value);
+
+        // Convert to integer for math operations
         valueInt = parseInt(resident.value);
         amountSold = valueInt;
+
         // Do the evaluation
         if(sellerBalanceInt < valueInt) {
-            
+            // If the sellers balance is less than the amount being purchased, then the seller will sell just what they have.
             amountSold = sellerBalance;
         }
     }).then(() => {
+        // This query is to get the buyers CURRENT balance BEFORE the trade. This is used to "fix" their available balance later.
         fabService.query("admin", constants.getEnergy, [resident.energyInc])
         .then((payload1) => {
             payloadObj1 = JSON.parse(payload1);
             buyerBalance = parseInt(payloadObj1.value);
         })
     }).then(() => {
+        // Preventative
         if(amountSold != 0 || amountSold != '0') {
             fabService.invoke("admin", constants.trade, [args])
+            // Stores the sellers new balance after the trade, will be sent back to update balance.
             sellerBalanceInt = sellerBalanceInt - amountSold;
         }
     }).then(() => {
+        // will be the arguments used to "consume" the extra energy from the buyer. Currently the trade adds the energy bought to the total balance
+        // We want that energy to be consumed immediately after purchased.
         resObj = {
             owner: "House" + resident.buyer,
             ownerType: "Resident",

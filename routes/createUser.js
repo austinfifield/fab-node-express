@@ -1,17 +1,24 @@
+/*
+createUser.js - This endpoint will recieve POST requests to CREATE residents for the network. The resident just needs to be created once unless
+the docker containers for the chaincode are brought down; if that happends you will have to recreate everything. You can use POSTMAN/cURL or
+the createUser.py located in the app root folder.
+*/
+
+
 let express = require('express');
 let router = express.Router();
 const constants = require('../src/constants');
 let appRoot = require('app-root-path');
 let fabService = require(`${appRoot}/src/fabric/fabric-interface`);
 
-
 let resObj = {}
 
+// GET request, currently useless
 router.get("/", (req, res) => {
     res.send("Get request does nothing.");
 });
 
-
+// POST request
 router.post("/", (req, res) => {
     // Reads in the request body
     let resident = req.body;
@@ -31,7 +38,8 @@ router.post("/", (req, res) => {
         // Arguments needed for invoking the blockchain
         let args = [resident.id, JSON.stringify(resObj)];
     
-    // Creates a user for the SDK ONLY! you still need to invoke the blockchain!
+    // Creates a user for the SDK ONLY! you still need to invoke the blockchain! These will appear in the appRoot/tmp directory
+    // If the docker container for the chaincode is ever restarted you will have to delete the tmp folder and recreate the residents
     fabService.makeUser(resident.alias, "123456")
     .then(() => {
 

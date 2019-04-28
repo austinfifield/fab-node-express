@@ -1,13 +1,20 @@
+/*
+produce.js - This endpoint recieves a POST request to produce energy. This is used in the PRODUCE function from serial.js
+*/
+
+
 let express = require('express');
 let router = express.Router();
 const constants = require('../src/constants');
 let appRoot = require('app-root-path');
 let fabService = require(`${appRoot}/src/fabric/fabric-interface`);
 
+// GET request, currently useless
 router.get("/", (req, res) => {
     res.send("Under construction...")
 });
 
+// POST request
 router.post("/", (req, res) => {
     
     let resident = req.body;

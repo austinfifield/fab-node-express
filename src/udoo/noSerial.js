@@ -1,3 +1,20 @@
+/*
+noSerial.js - This file is used to test the network using a computer rather than an UDOO. It is exactly the same as
+serial.js except there are no serial comm. You will need to change the function import in /fabric from serial.js to noSerial.js
+
+The data is passed in as command line arguments:
+
+    node ./src/udoo/noSerial.js 1 0 0
+
+    will query House 1's energy balance
+
+    node ./src/udoo/noSerial.js 2 5 4
+
+    will have House 2 buy 5 energy from House 4
+
+    etc
+
+*/
 const tynt = require('tynt')
 const axios = require('axios');
 const moment = require('moment')
@@ -186,6 +203,6 @@ module.exports = {
     dataObj = JSON.parse(data);
 
     console.log(dataObj.source + " " + dataObj.value + " 0")
-    //port.write(dataObj.source + " " + dataObj.value + " 0" + '\n');
+
   }
 }
