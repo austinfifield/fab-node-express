@@ -33,6 +33,7 @@ router.post("/", (req, res) => {
     let amountSold = 0;
     let sellerBalance = 0;
     let valueInt = 0;
+    let buyerBalance = 0;
 
     // We need to check that the person selling energy has enough to sell
     // The person selling energy with be the energy decreasing ID
