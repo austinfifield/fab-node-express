@@ -64,8 +64,8 @@ router.post("/", (req, res) => {
             payloadObj1 = JSON.parse(payload1);
             buyerBalance = parseInt(payloadObj1.value) ;
             console.log("BUYER BALANCE: " + buyerBalance)
-        })
-        buyerBalance = buyerBalance - amountSold;
+
+            buyerBalance = buyerBalance - amountSold;
         console.log(buyerBalance);
 
         // Preventative
@@ -79,6 +79,8 @@ router.post("/", (req, res) => {
         args1 = [resObj1.idres, JSON.stringify(resObj1)];
 
         fabService.invoke("admin", constants.createEnergy, args1)
+        })
+
 
     }).then(() => {
 
