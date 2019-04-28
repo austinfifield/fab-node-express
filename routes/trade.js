@@ -90,11 +90,14 @@ router.post("/", (req, res) => {
         }
         console.log(transObj);
         res.send(JSON.stringify(transObj))
-    })
-    .then(() => {
-        console.log(resObj1.value);
-        console.log(typeof(resObj1.value));
-        fabService.invoke("admin", constants.createEnergy, args1);
+
+        .then(() => {
+        
+            fabService.invoke("admin", constants.createEnergy, args1);
+        })
+        .catch(err => {
+            console.log(err);
+        })
     })
     .catch(err => {
         console.log(err)
