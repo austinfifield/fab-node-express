@@ -82,7 +82,7 @@ router.post("/", (req, res) => {
             owner: "House" + resident.buyer,
             ownerType: "Resident",
             iden: "iden" + resident.buyer,
-            value: buyerBalance,
+            value: JSON.stringify(buyerBalance),
             idres: "idres" + resident.buyer
             }
         args1 = [resObj1.idres, JSON.stringify(resObj1)];
