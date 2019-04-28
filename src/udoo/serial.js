@@ -59,7 +59,7 @@ parser.on('data', data =>{
     }
 
     // Consume
-    else if(source != 0 && value > 0 && source == destination) {
+    else if(source != 0 && value >= 0 && source == destination) {
         console.log(tynt.Red("Consume"));
 
         axios.post('http://localhost:3000/consume', {
@@ -97,7 +97,8 @@ parser.on('data', data =>{
             energyDec : "iden" + destination,
             value: value.toString(),
             tokenDec: "idtok" + source,
-            timestamp: formatted
+            timestamp: formatted,
+            buyer: source
             
         }).then(res => {
             // send amount consumed

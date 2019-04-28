@@ -49,12 +49,26 @@ router.post("/", (req, res) => {
             amountSold = sellerBalance;
         }
     }).then(() => {
+        fabService.query("admin", constants.getEnergy, [resident.energyInc])
+        .then((payload1) => {
+            payloadObj1 = JSON.parse(payload1);
+            buyerBalance = parseInt(payloadObj1.value);
+        })
+    }).then(() => {
         if(amountSold != 0 || amountSold != '0') {
             fabService.invoke("admin", constants.trade, [args])
             sellerBalanceInt = sellerBalanceInt - amountSold;
         }
     }).then(() => {
-
+        resObj = {
+            owner: "House" + resident.buyer,
+            ownerType: "Resident",
+            iden: "iden" + resident.buyer,
+            value: buyerBalance,
+            idres: "idres" + resident.buyer
+            }
+        let args = [resident.idres, JSON.stringify(resObj)];
+        fabService.invoke("admin", constants.createEnergy, args)
         transObj = {
             amountSold: parseInt(amountSold),
             sellerBalance: parseInt(sellerBalanceInt)
@@ -68,29 +82,3 @@ router.post("/", (req, res) => {
  })         
 
 module.exports = router;
-
-
-// fabService.invoke("admin", constants.trade, args)
-// .then(() => {
-//     fabService.query("admin", constants.getEnergy, [resident.energyInc])
-//     .then((buyer) => {
-//         buyerBalance = JSON.parse(buyer);
-//     })
-//     .then(() => {
-//         fabService.query("admin", constants.getEnergy, [resident.energyDec])
-//         .then(seller => {
-//             sellerBalance = JSON.parse(seller);
-//         })
-//         .then(() => {
-            
-//             transObj = {
-//                 buyer: parseInt(buyerBalance.value) + parseInt(resident.value),
-//                 seller: parseInt(sellerBalance.value) - parseInt(resident.value)
-//             }
-//             console.log(transObj)
-//             res.send(JSON.stringify(transObj))
-//         })
-//     })
-
-// })            
-// });
