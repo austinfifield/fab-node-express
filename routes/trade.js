@@ -34,7 +34,8 @@ router.post("/", (req, res) => {
     let sellerBalance = 0;
     let valueInt = 0;
     let buyerBalance = 0;
-
+    let args1 = 0;
+    
     // We need to check that the person selling energy has enough to sell
     // The person selling energy with be the energy decreasing ID
     fabService.query("admin", constants.getEnergy, [resident.energyDec])
@@ -83,7 +84,7 @@ router.post("/", (req, res) => {
             value: JSON.stringify(buyerBalance),
             idres: "idres" + resident.buyer
             }
-        let args1 = [resObj1.idres, JSON.stringify(resObj1)];
+        args1 = [resObj1.idres, JSON.stringify(resObj1)];
         fabService.invoke("admin", constants.createEnergy, args1)
         transObj = {
             amountSold: parseInt(amountSold),
