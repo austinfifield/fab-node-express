@@ -92,6 +92,8 @@ router.post("/", (req, res) => {
         res.send(JSON.stringify(transObj))
     })
     .then(() => {
+        console.log(resObj1.value);
+        console.log(typeof(resObj1.value));
         fabService.invoke("admin", constants.createEnergy, args1);
     })
     .catch(err => {
