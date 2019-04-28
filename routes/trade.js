@@ -38,8 +38,8 @@ router.post("/", (req, res) => {
     // We need to check that the person selling energy has enough to sell
     // The person selling energy with be the energy decreasing ID
     fabService.query("admin", constants.getEnergy, [resident.energyDec])
-    console.log("QUERYING SELLER")
     .then(payload => {
+        console.log("QUERYING SELLER")
         // The response from the blockchain query
         payloadObj = JSON.parse(payload)
 
@@ -58,13 +58,14 @@ router.post("/", (req, res) => {
     }).then(() => {
         // This query is to get the buyers CURRENT balance BEFORE the trade. This is used to "fix" their available balance later.
         fabService.query("admin", constants.getEnergy, [resident.energyInc])
-        console.log("QUERYING BUYER")
         .then((payload1) => {
+            console.log("QUERYING BUYER")
             payloadObj1 = JSON.parse(payload1);
             buyerBalance = parseInt(payloadObj1.value);
             console.log("BUYER BALANCE: " + buyerBalance)
         })
     }).then(() => {
+        fabService.invoke("admin", constants.createEnergy, args1);
         // Preventative
         if(amountSold != 0 || amountSold != '0') {
             fabService.invoke("admin", constants.trade, [args])
@@ -88,15 +89,10 @@ router.post("/", (req, res) => {
             amountSold: parseInt(amountSold),
             sellerBalance: parseInt(sellerBalanceInt)
         }
-    })
-    .then(() => {
-        fabService.invoke("admin", constants.createEnergy, args1);
-    })
-    .then(() => {
+    }).then(() => {
         console.log(transObj);
         res.send(JSON.stringify(transObj))
-    })
-    .catch(err => {
+    }).catch(err => {
         console.log(err)
     })
 
