@@ -88,16 +88,13 @@ router.post("/", (req, res) => {
             amountSold: parseInt(amountSold),
             sellerBalance: parseInt(sellerBalanceInt)
         }
+    })
+    .then(() => {
+        fabService.invoke("admin", constants.createEnergy, args1);
+    })
+    .then(() => {
         console.log(transObj);
         res.send(JSON.stringify(transObj))
-
-        .then(() => {
-        
-            fabService.invoke("admin", constants.createEnergy, args1);
-        })
-        .catch(err => {
-            console.log(err);
-        })
     })
     .catch(err => {
         console.log(err)
