@@ -66,6 +66,7 @@ router.post("/", (req, res) => {
             console.log("BUYER BALANCE: " + buyerBalance)
         })
         buyerBalance = buyerBalance - amountSold;
+        console.log(buyerBalance);
 
         // Preventative
         resObj1 = {
