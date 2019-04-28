@@ -79,7 +79,7 @@ router.post("/", (req, res) => {
             idres: "idres" + resident.buyer
             }
         let args = [resObj.idres, JSON.stringify(resObj)];
-        fabService.invoke("admin", constants.createEnergy, args)
+        fabService.invoke("admin", constants.createEnergy, [args])
         transObj = {
             amountSold: parseInt(amountSold),
             sellerBalance: parseInt(sellerBalanceInt)
