@@ -66,18 +66,10 @@ router.post("/", (req, res) => {
             console.log("BUYER BALANCE: " + buyerBalance)
         })
 
-        resObj1 = {
-            owner: "House" + resident.buyer,
-            ownerType: "Resident",
-            iden: "iden" + resident.buyer,
-            value: JSON.stringify(buyerBalance),
-            idres: "idres" + resident.buyer
-            }
-        args1 = [resObj1.idres, JSON.stringify(resObj1)];
+
 
 
     }).then(() => {
-        fabService.invoke("admin", constants.createEnergy, args1);
         // Preventative
         if(amountSold != 0 || amountSold != '0') {
             fabService.invoke("admin", constants.trade, [args])
@@ -85,6 +77,17 @@ router.post("/", (req, res) => {
             // Stores the sellers new balance after the trade, will be sent back to update balance.
             sellerBalanceInt = sellerBalanceInt - amountSold;
         }
+
+        resObj1 = {
+            owner: "House" + resident.buyer,
+            ownerType: "Resident",
+            iden: "iden" + resident.buyer,
+            value: buyerBalance,
+            idres: "idres" + resident.buyer
+            }
+        args1 = [resObj1.idres, JSON.stringify(resObj1)];
+
+
     }).then(() => {
         // will be the arguments used to "consume" the extra energy from the buyer. Currently the trade adds the energy bought to the total balance
         // We want that energy to be consumed immediately after purchased.
